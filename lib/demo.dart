@@ -49,7 +49,7 @@ class _TabbarBgColorTesttate extends State<TabbarBgColorTest> with SingleTickerP
         children: _tabs.map((item) => Container(
           color: Colors.blueGrey,
           alignment: AlignmentDirectional.center,
-          child: Text(item),
+          child: createField(),
         )).toList(),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -77,5 +77,43 @@ class _TabbarBgColorTesttate extends State<TabbarBgColorTest> with SingleTickerP
         },
       )
     );
+  }
+
+  // textfield
+  Widget createField(){
+  return Expanded(
+                child:ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxHeight: 40,
+                        ), 
+                        child: TextField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 15),
+                            fillColor: Color(0XFFFFF8F4),
+                            filled: true,
+                            enabledBorder: OutlineInputBorder(
+                              /*边角*/
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5), //边角为5
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.white, //边线颜色为白色
+                                width: 1, //边线宽度为2
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white, //边框颜色为白色
+                                  width: 1, //宽度为5
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5), //边角为30
+                                ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      
+                    );
   }
 }
