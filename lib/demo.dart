@@ -49,7 +49,7 @@ class _TabbarBgColorTesttate extends State<TabbarBgColorTest> with SingleTickerP
         children: _tabs.map((item) => Container(
           color: Colors.blueGrey,
           alignment: AlignmentDirectional.center,
-          child: createField(),
+          child: Container(),
         )).toList(),
       ),
       bottomNavigationBar: BottomNavigationBar(

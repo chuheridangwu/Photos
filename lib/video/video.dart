@@ -48,7 +48,7 @@ class VideoTypeItem extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: ExactAssetImage(data.icon), fit: BoxFit.fill)),
+                  image: ExactAssetImage(data.icon), fit: BoxFit.cover)),
           child: bottomWidget(),
         ),
       ),

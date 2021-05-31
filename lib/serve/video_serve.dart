@@ -13,7 +13,7 @@ class VideoServe{
   VideoServe.initData(){
     List titles = ["跑马灯","风景建筑","经典影视","动物萌宠","唯美动态","抖音网红","情侣爱情","文字控","炫酷创意","火爆游戏","卡通动漫","娱乐明星","男人","明星","其他"];
     for (var i = 0; i < titles.length; i++) {
-      VideoTypeData videos = VideoTypeData(titles[i],"images/video_type_0.jpeg","res/$i.json");
+      VideoTypeData videos = VideoTypeData(titles[i],"images/video_type_$i.jpg","res/$i.json");
       videoTypes.add(videos);
     }
   }
