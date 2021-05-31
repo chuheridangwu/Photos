@@ -7,6 +7,9 @@ import 'package:mglobalphoto/home/home.dart';
 import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/style/appconfig.dart';
 import 'package:mglobalphoto/video/video.dart';
+import 'package:mglobalphoto/video/video_list.dart';
+import 'package:mglobalphoto/video/video_play_item.dart';
+import 'package:mglobalphoto/video/video_play_list.dart';
 import 'package:share/share.dart';
 
 void main() {
@@ -36,6 +39,8 @@ class MyApp extends StatelessWidget {
       home: MainPageView(),
       routes: {
         AppConfig.search :(ctx) => SearchView(),
+        VideoListView.routeName :(ctx) => VideoListView(),
+        VideoPlayListView.routeName : (ctx) => VideoPlayListView(),
       },
     );
   }
@@ -105,6 +110,6 @@ List<BottomNavigationBarItem> navBarItems = [
 
 List<Widget> pages = [
   HomeLiveView(),
-  VideoListView(),
+  VideoTypeView(),
   TabbarBgColorTest(),
 ];

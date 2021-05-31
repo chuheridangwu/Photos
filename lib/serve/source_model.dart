@@ -9,5 +9,6 @@ class Anchor extends UserInfo{
   final String liveAddres;  // 直播地址
   int width;
   int height;
-  Anchor({this.liveAddres,String userName, String headerIcon, int uid,  int level,int coins,this.width,this.height}) : super(userName:userName, headerIcon:headerIcon, uid:uid);
+  String videoTime;
+  Anchor({this.liveAddres,String userName, String headerIcon, int uid, this.videoTime, int level,int coins,this.width,this.height}) : super(userName:userName, headerIcon:headerIcon, uid:uid);
 }
