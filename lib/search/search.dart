@@ -1,15 +1,17 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:mglobalphoto/search/search_result.dart';
 import 'package:mglobalphoto/serve/serarch_serve.dart';
 import 'package:mglobalphoto/style/button.dart';
 
 class SearchView extends StatefulWidget {
+  static const routeName = "/SearchView";
   @override
   _SearchViewState createState() => _SearchViewState();
 }
 
 class _SearchViewState extends State<SearchView> {
-  final SearchServe _serve = SearchServe();
+  final SearchServe _serve = SearchServe.initData();
   final _controller = TextEditingController();
   int _keyIndex = 1;
   List<String> _keywords = [];
@@ -48,10 +50,10 @@ class _SearchViewState extends State<SearchView> {
   // 搜索框
   Widget createSearchBoard(){
     return  Container(
-            height: 44.0,
+            height: 40.0,
             margin: EdgeInsets.only(top:10),
             child: new Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: new Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -59,16 +61,15 @@ class _SearchViewState extends State<SearchView> {
                   borderRadius: BorderRadius.all(Radius.circular(23)),
                 ),
                   child: new Row(
-                    
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(width: 5.0,),
+                      SizedBox(width: 12.0,),
                       Icon(Icons.search, color: Colors.grey,size: 20,),
                       Expanded(
                         child: TextField(
                             controller: _controller,
                             decoration: new InputDecoration(
-                              contentPadding: EdgeInsets.only(top: 0.0),
+                              contentPadding: EdgeInsets.fromLTRB(8, 0, 0, 10),
                               hintText: 'Search', border: InputBorder.none),
                               // onChanged: onSearchTextChanged,
                             ),
@@ -92,7 +93,7 @@ class _SearchViewState extends State<SearchView> {
   // 标题
   Widget createTitle() {
     return Container(
-      padding: EdgeInsets.fromLTRB(8, 3, 10, 3),
+      padding: EdgeInsets.fromLTRB(10, 3, 10, 3),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -119,7 +120,9 @@ class _SearchViewState extends State<SearchView> {
             margin: EdgeInsets.all(5),
             child: Text(e),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, SearchListView.routeName,arguments: e);
+          },
         );
       }).toList(),
     );

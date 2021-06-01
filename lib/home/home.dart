@@ -72,7 +72,7 @@ class _HomeLiveViewState extends State<HomeLiveView> with SingleTickerProviderSt
     return FloatingActionButton(
       child: Icon(Icons.search),
       onPressed: () {
-        Navigator.of(context).pushNamed(AppConfig.search);
+        Navigator.of(context).pushNamed(SearchView.routeName);
       },
     );
   }
