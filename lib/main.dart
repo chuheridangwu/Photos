@@ -6,6 +6,7 @@ import 'package:mglobalphoto/banner/banner_list.dart';
 import 'package:mglobalphoto/demo.dart';
 import 'package:mglobalphoto/home/drawer.dart';
 import 'package:mglobalphoto/home/home.dart';
+import 'package:mglobalphoto/home/homg_page_1_list.dart';
 import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/search/search_result.dart';
 import 'package:mglobalphoto/style/appconfig.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         VideoListView.routeName :(ctx) => VideoListView(),
         VideoPlayListView.routeName : (ctx) => VideoPlayListView(),
         BannerListView.routeName :(ctx) => BannerListView(),
+        HomePageStartList.routeName :(ctx) => HomePageStartList(),
       },
     );
   }

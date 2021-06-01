@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mglobalphoto/home/home_item.dart';
+import 'package:mglobalphoto/home/homg_page_1_list.dart';
 import 'package:mglobalphoto/serve/data_manage.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -54,12 +55,12 @@ class _HomePageViewState extends State<HomePageView> {
         itemCount: anchorList.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, //横轴三个子widget
-          childAspectRatio: 0.85, //宽高比为1时，子widget
+          childAspectRatio: 360/413, //宽高比为1时，子widget
         ),
         itemBuilder: (ctx, index) {
           final anchor = anchorList[index];
           return HomeItem(anchor, () {
-            Navigator.push(context, MaterialPageRoute(builder: (_) {}));
+            Navigator.pushNamed(context, HomePageStartList.routeName,arguments: anchor);
           });
         });
   }
