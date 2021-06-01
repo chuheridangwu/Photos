@@ -4,7 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:mglobalphoto/demo.dart';
 import 'package:mglobalphoto/home/drawer.dart';
 import 'package:mglobalphoto/home/home.dart';
+import 'package:mglobalphoto/search/search.dart';
+import 'package:mglobalphoto/search/search_result.dart';
+import 'package:mglobalphoto/style/appconfig.dart';
 import 'package:mglobalphoto/video/video.dart';
+import 'package:mglobalphoto/video/video_list.dart';
+import 'package:mglobalphoto/video/video_play_list.dart';
 import 'package:share/share.dart';
 
 void main() {
@@ -32,6 +37,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.yellow,
       ),
       home: MainPageView(),
+      routes: {
+        SearchView.routeName :(ctx) => SearchView(),
+        SearchListView.routeName :(ctx) => SearchListView(),
+        VideoListView.routeName :(ctx) => VideoListView(),
+        VideoPlayListView.routeName : (ctx) => VideoPlayListView(),
+      },
     );
   }
 }
@@ -100,6 +111,6 @@ List<BottomNavigationBarItem> navBarItems = [
 
 List<Widget> pages = [
   HomeLiveView(),
-  VideoListView(),
+  VideoTypeView(),
   TabbarBgColorTest(),
 ];
