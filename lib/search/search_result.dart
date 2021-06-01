@@ -19,29 +19,24 @@ class _SearchListViewState extends State<SearchListView> with SingleTickerProvid
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: _serve.types.length, vsync: this)..addListener(() {
-      SearchTypeData typeData = _serve.types[_tabController.index];
-       _serve.getSearchResult(typeData).then((value){
-            setState(() {
-              _anchors = value;
-            });
-        });
-    });
+
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
         String key = ModalRoute.of(context).settings.arguments as String;
-        SearchTypeData typeData = _serve.types[_tabController.index];
-        _serve.getSearchResult(typeData).then((value){
-           
+    setState(() {
+      _keyword = key;
+    });
+
+        _tabController = TabController(length: _serve.types.length, vsync: this)..addListener(() {
+      SearchTypeData typeData = _serve.types[_tabController.index];
+       _serve.getSearchResult(typeData).then((value){
             setState(() {
               _anchors = value;
             });
         });
-    setState(() {
-      _keyword = key;
     });
   }
 

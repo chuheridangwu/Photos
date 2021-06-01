@@ -41,9 +41,8 @@ class _HomePageStartListState extends State<HomePageStartList> {
         } else {
           _anchors.addAll(value);
         }
+        _refreshController.loadComplete();
       });
-
-      _refreshController.loadComplete();
     });
   }
 
@@ -64,6 +63,7 @@ class _HomePageStartListState extends State<HomePageStartList> {
   // 创建smart
   Widget createSmartView() {
     return SmartRefresher(
+        enablePullDown: false,
         enablePullUp: true,
         onLoading: loadMoreData,
         footer: ClassicFooter(
@@ -80,7 +80,7 @@ class _HomePageStartListState extends State<HomePageStartList> {
         itemCount: _anchors.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, //横轴三个子widget
-          childAspectRatio: 235/417, //宽高比为1时，子widget
+          childAspectRatio: 235 / 417, //宽高比为1时，子widget
         ),
         itemBuilder: (ctx, index) {
           final anchor = _anchors[index];
@@ -88,7 +88,7 @@ class _HomePageStartListState extends State<HomePageStartList> {
             onTap: () {},
             child: CachedNetworkImage(
               placeholder: (context, url) => Container(),
-              errorWidget: (context,url,_) => Container(),
+              errorWidget: (context, url, _) => Container(),
               imageUrl: anchor.headerIcon,
               fit: BoxFit.cover,
             ),

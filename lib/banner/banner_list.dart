@@ -77,20 +77,23 @@ class _BannerListViewState extends State<BannerListView> {
           loadStyle: LoadStyle.ShowWhenLoading,
         ),
         controller: _refreshController,
-        child: createListView(),
+        child: createGridView(),
       ),
     );
   }
 
-  // 创建listView
-  Widget createListView() {
-    return ListView.builder(
-        itemCount: _anchors.length,
-        itemBuilder: (ctx, index) {
-          return CachedNetworkImage(
+  // 创建GridView
+  Widget createGridView() {
+    return GridView.builder(
+      itemCount: _anchors.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 1
+      ),
+       itemBuilder: (ctx,index){
+       return CachedNetworkImage(
             imageUrl: _anchors[index].headerIcon,
             fit: BoxFit.cover,
           );
-        });
+    });
   }
 }

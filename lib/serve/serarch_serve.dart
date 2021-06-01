@@ -2,6 +2,15 @@ import 'dart:convert';
 import 'package:mglobalphoto/serve/http_request.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 
+enum SearchEnum {
+  HENGPING,
+  SHUPING,
+  BIZHI,
+  TOUXIANG,
+  SOUGOU,
+  QIHOO,
+}
+
 class SearchServe {
   /// 获取搜索关键字
   Future<List> getKeywords(int index) async {
@@ -34,61 +43,119 @@ class SearchServe {
   }
 
   Future<List<Anchor>> getSearchResult(SearchTypeData typeData) async {
-    List<Anchor> anchors = [];
 
     if (typeData.type == SearchEnum.HENGPING) {
-      Map<String, dynamic> data = await HttpRequrst.request(typeData.path);
-      if (int.parse(data["errno"]) == 0) {
-        List<dynamic> items = data["data"];
-        for (var item in items) {
-          Anchor anchor =
-              Anchor(userName: item["utag"], headerIcon: item["img_1024_768"]);
-          anchors.add(anchor);
-        }
-      }
-    }else if(typeData.type == SearchEnum.SHUPING){
-      shupingRequest(typeData, anchors);
-    }else {
-      qihooRequest(typeData, anchors);
+     return  hengpingRequest(typeData);
+    } else if (typeData.type == SearchEnum.SHUPING) {
+      return shupingRequest(typeData);
+    } else if (typeData.type == SearchEnum.BIZHI) {
+     return bizhiRequest(typeData);
+    } else if (typeData.type == SearchEnum.TOUXIANG) {
+     return touxiangRequest(typeData);
+    } else if (typeData.type == SearchEnum.SOUGOU) {
+     return sougouRequest(typeData);
+    } else {
+     return qihooRequest(typeData);
     }
+  }
 
+  // 横屏
+  Future<List<Anchor>>  hengpingRequest(SearchTypeData typeData) async {
+    List<Anchor> anchors = [];
+    Map<String, dynamic> data = await HttpRequrst.request(typeData.path);
+    if (int.parse(data["errno"]) == 0) {
+      List<dynamic> items = data["data"];
+      for (var item in items) {
+        Anchor anchor =
+            Anchor(userName: item["utag"], headerIcon: item["img_1024_768"]);
+        anchors.add(anchor);
+      }
+    }
     return anchors;
   }
 
   // 竖屏搜索
-  void shupingRequest(SearchTypeData typeData, List<Anchor> anchors)async{
+  Future<List<Anchor>> shupingRequest(SearchTypeData typeData) async {
+    List<Anchor> anchors = [];
+
     String src = await HttpRequrst.requestJsonData(typeData.path);
-    Map<String,dynamic> data = jsonDecode(src);
+    Map<String, dynamic> data = jsonDecode(src);
     List<dynamic> items = data["res"]["vertical"];
-     for (var item in items) {
-          Anchor anchor =
-              Anchor(userName: item["form"]["name"], headerIcon: item["img"]);
-          anchors.add(anchor);
+    for (var item in items) {
+      Anchor anchor =
+          Anchor(userName: item["form"]["name"], headerIcon: item["img"]);
+      anchors.add(anchor);
+    }
+    return anchors;
+  }
+
+  // 头像搜索
+  Future<List<Anchor>> touxiangRequest(SearchTypeData typeData) async {
+    List<Anchor> anchors = [];
+
+    Map<String, dynamic> data = await HttpRequrst.requestJsonData(typeData.path);
+    if (data["code"] == 0) {
+      List<dynamic> items = data["res"]["avatar"];
+      for (var item in items) {
+        Anchor anchor =
+            Anchor(userName: item["user"]["name"], headerIcon: item["thumb"]);
+        anchors.add(anchor);
       }
+    }
+    return anchors;
+  }
+
+  // 搜狗搜索
+  Future<List<Anchor>> sougouRequest(SearchTypeData typeData) async {
+    List<Anchor> anchors = [];
+
+    String src = await HttpRequrst.requestJsonData(typeData.path);
+    Map<String, dynamic> data = jsonDecode(src);  
+    List<dynamic> items = data["items"];
+    for (var item in items) {
+      Anchor anchor =
+          Anchor(userName: item["title"], headerIcon: item["thumbUrl"]);
+      anchors.add(anchor);
+    }
+    return anchors;
+  }
+
+  // 壁纸搜索
+  Future<List<Anchor>> bizhiRequest(SearchTypeData typeData) async {
+    List<Anchor> anchors = [];
+
+    Map<String, dynamic> data = await HttpRequrst.requestJsonData(typeData.path);
+    if (data["code"] == 200) {
+      List<dynamic> items = data["value"]["data"];
+      for (var item in items) {
+        Anchor anchor =
+            Anchor(userName: item["cp_name"], headerIcon: item["small"]);
+        anchors.add(anchor);
+      }
+    }
+    return anchors;
   }
 
   // 360搜索
-  void qihooRequest(SearchTypeData typeData, List<Anchor> anchors) async {
+  Future<List<Anchor>> qihooRequest(SearchTypeData typeData) async {
+
+    List<Anchor> anchors = [];
+
     String src = await HttpRequrst.requestJsonData(typeData.path);
 
-      Map<String, dynamic> data = jsonDecode(src);
-        
-        List<dynamic> items = data["list"];
-        for (var item in items) {
-          Anchor anchor =
-              Anchor(userName: item["title"], headerIcon: item["thumb_bak"],width: int.parse(item["width"]),height: int.parse(item["height"]));
-          anchors.add(anchor);
-      }
-  }
-}
+    Map<String, dynamic> data = jsonDecode(src);
 
-enum SearchEnum {
-  HENGPING,
-  SHUPING,
-  BIZHI,
-  TOUXIANG,
-  SOUGOU,
-  QIHOO,
+    List<dynamic> items = data["list"];
+    for (var item in items) {
+      Anchor anchor = Anchor(
+          userName: item["title"],
+          headerIcon: item["thumb_bak"],
+          width: int.parse(item["width"]),
+          height: int.parse(item["height"]));
+      anchors.add(anchor);
+    }
+    return anchors;
+  }
 }
 
 class SearchTypeData {
@@ -107,7 +174,7 @@ class SearchTypeData {
         break;
       case SearchEnum.BIZHI:
         src =
-            " http://api-theme.meizu.com/wallpapers/public/search?os=0&mzos=1.0&screen_size=1x1&language=zh-CN&locale=cn&country=&imei=1&sn=1&device_model=M&firmware=Flyme2.1.2Y&v=5&vc=1&net=wifi&max=30&q=美女&start=0";
+            "http://api-theme.meizu.com/wallpapers/public/search?os=0&mzos=1.0&screen_size=1x1&language=zh-CN&locale=cn&country=&imei=1&sn=1&device_model=M&firmware=Flyme2.1.2Y&v=5&vc=1&net=wifi&max=30&q=美女&start=0";
         break;
       case SearchEnum.SOUGOU:
         src =

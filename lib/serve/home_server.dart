@@ -17,16 +17,19 @@ class HomeServe {
     List<Anchor> anchors = [];
     if (data["msgCode"] == 0) {
       List<dynamic> items = data["body"]["list"];
-      for (var item in items) {
-        int uid = item["id"];
-        String url = item["url"] + "@235,417.jpg";
-        Anchor anchor = Anchor(uid: uid, headerIcon: url,width: 235,height: 417);
-        anchors.add(anchor);
+      if (items.length > 0) {
+        for (var item in items) {
+          int uid = item["id"];
+          String url = item["url"] + "@235,417.jpg";
+          Anchor anchor =
+              Anchor(uid: uid, headerIcon: url, width: 235, height: 417);
+          anchors.add(anchor);
+        }
       }
     }
 
     _isStopRefresh = anchors.length < 10;
-
+    
     return anchors;
   }
 }
