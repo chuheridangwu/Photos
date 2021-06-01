@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mglobalphoto/banner/banner.dart';
 import 'package:mglobalphoto/demo.dart';
 import 'package:mglobalphoto/home/drawer.dart';
 import 'package:mglobalphoto/home/home.dart';
@@ -8,7 +9,6 @@ import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/style/appconfig.dart';
 import 'package:mglobalphoto/video/video.dart';
 import 'package:mglobalphoto/video/video_list.dart';
-import 'package:mglobalphoto/video/video_play_item.dart';
 import 'package:mglobalphoto/video/video_play_list.dart';
 import 'package:share/share.dart';
 
@@ -104,12 +104,12 @@ class MyNavBarItem extends BottomNavigationBarItem {
 List<BottomNavigationBarItem> navBarItems = [
   MyNavBarItem("Home", Icons.home, Icons.home_outlined),
   MyNavBarItem("Video", Icons.play_circle_fill, Icons.play_circle_outline),
-  MyNavBarItem("Video", Icons.play_circle_fill, Icons.play_circle_outline),
+  MyNavBarItem("Banner", Icons.view_headline, Icons.view_headline),
 
 ];
 
 List<Widget> pages = [
   HomeLiveView(),
   VideoTypeView(),
-  TabbarBgColorTest(),
+  BannerView(),
 ];
