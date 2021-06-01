@@ -82,6 +82,7 @@ class _SearchListViewState extends State<SearchListView> with SingleTickerProvid
   // GaridView
   Widget createGridView(){
     return GridView.builder(
+      itemCount: _anchors.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         mainAxisSpacing: 5,
         crossAxisSpacing: 5,

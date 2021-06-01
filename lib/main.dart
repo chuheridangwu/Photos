@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mglobalphoto/banner/banner.dart';
+import 'package:mglobalphoto/banner/banner_list.dart';
 import 'package:mglobalphoto/demo.dart';
 import 'package:mglobalphoto/home/drawer.dart';
 import 'package:mglobalphoto/home/home.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         SearchListView.routeName :(ctx) => SearchListView(),
         VideoListView.routeName :(ctx) => VideoListView(),
         VideoPlayListView.routeName : (ctx) => VideoPlayListView(),
+        BannerListView.routeName :(ctx) => BannerListView(),
       },
     );
   }

@@ -56,20 +56,19 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
     final size = MediaQuery.of(context).size;
 
     return FutureBuilder(builder: (ctx, asyncs) {
-      return Container(
-        width: size.width,
-        height: size.height,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Positioned(
-              bottom: 10,
-              right: 10,
-              child: IconButton(icon: Icon(Icons.close,),onPressed: (){
-              Navigator.of(context).pop();
-            },)),
-            liveViewWidget(size),
-          ],
+      return Scaffold(
+        floatingActionButton: FloatingActionButton(child: Icon(Icons.close),onPressed: (){
+          Navigator.of(context).pop();
+        },),
+        body: Container(
+          width: size.width,
+          height: size.height,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              liveViewWidget(size),
+            ],
+          ),
         ),
       );
     });
