@@ -35,6 +35,7 @@ class _ShuffleVideoPlayState extends State<ShuffleVideoPlay> {
           print("播放器播放视频失败 - ${error.toString()}");
           setState(() {
             _isplay = false;
+            createVideoController();
           });
         });
       _videoController.addListener(() {
@@ -63,6 +64,7 @@ class _ShuffleVideoPlayState extends State<ShuffleVideoPlay> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.black,
       body: createLiveView(),
       floatingActionButton: createFloatingBtn(),
     );
@@ -74,7 +76,9 @@ class _ShuffleVideoPlayState extends State<ShuffleVideoPlay> {
         ? VideoPlayer(_videoController)
         : Image.asset(
             "images/other/shuffle_bg.png",
-            fit: BoxFit.fill,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            fit: BoxFit.cover,
           );
   }
 
@@ -86,9 +90,10 @@ class _ShuffleVideoPlayState extends State<ShuffleVideoPlay> {
         FloatingActionButton(
           heroTag: "2",
           onPressed: () {
+            _videoController.pause();
             createVideoController();
           },
-          child: Icon(Icons.change_circle),
+          child: Icon(Icons.change_history),
         ),
         SizedBox(
           height: 10,
