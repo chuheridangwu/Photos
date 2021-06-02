@@ -4,7 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:mglobalphoto/banner/banner.dart';
 import 'package:mglobalphoto/banner/banner_list.dart';
 import 'package:mglobalphoto/demo.dart';
-import 'package:mglobalphoto/home/drawer.dart';
+import 'package:mglobalphoto/drawer/drawer.dart';
+import 'package:mglobalphoto/drawer/shuffle_video.dart';
+import 'package:mglobalphoto/drawer/privaty_webview.dart';
 import 'package:mglobalphoto/home/home.dart';
 import 'package:mglobalphoto/home/homg_page_1_list.dart';
 import 'package:mglobalphoto/search/search.dart';
@@ -47,6 +49,8 @@ class MyApp extends StatelessWidget {
         VideoPlayListView.routeName : (ctx) => VideoPlayListView(),
         BannerListView.routeName :(ctx) => BannerListView(),
         HomePageStartList.routeName :(ctx) => HomePageStartList(),
+        ShuffleVideoPlay.routeName :(ctx) => ShuffleVideoPlay(),
+        PrivatyWebView.routeName :(ctx) => PrivatyWebView(),
       },
     );
   }
