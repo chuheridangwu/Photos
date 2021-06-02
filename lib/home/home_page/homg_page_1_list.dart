@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mglobalphoto/home/home_server.dart';
+import 'package:mglobalphoto/home/photo_preview.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -85,7 +86,10 @@ class _HomePageStartListState extends State<HomePageStartList> {
         itemBuilder: (ctx, index) {
           final anchor = _anchors[index];
           return GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Map map = {"index":index,"list":_anchors};
+              Navigator.pushNamed(context, PhotoPreView.routeName,arguments: map);
+            },
             child: CachedNetworkImage(
               placeholder: (context, url) => Container(),
               errorWidget: (context, url, _) => Container(),

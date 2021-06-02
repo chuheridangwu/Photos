@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mglobalphoto/banner/banner_serve.dart';
+import 'package:mglobalphoto/home/photo_preview.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -32,14 +33,12 @@ class _BannerListViewState extends State<BannerListView> {
   // 下拉刷新
   void refreshData() {
       _bannerType.start = 0;
-      _bannerType.count = 30;
       requestData();
   }
 
   // 加载更多
   void loadMoreData(){
     _bannerType.start += 30;
-    _bannerType.count += 30;
     requestData();
   }
 
@@ -55,6 +54,7 @@ class _BannerListViewState extends State<BannerListView> {
       });
     });
     _refreshController.refreshCompleted();
+    _refreshController.loadComplete();
   }
 
   @override
@@ -77,23 +77,26 @@ class _BannerListViewState extends State<BannerListView> {
           loadStyle: LoadStyle.ShowWhenLoading,
         ),
         controller: _refreshController,
-        child: createGridView(),
+        child: createGridView()
       ),
     );
   }
 
   // 创建GridView
   Widget createGridView() {
-    return GridView.builder(
+    return ListView.builder(
       itemCount: _anchors.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 1
-      ),
        itemBuilder: (ctx,index){
-       return CachedNetworkImage(
-            imageUrl: _anchors[index].headerIcon,
-            fit: BoxFit.cover,
-          );
+       return GestureDetector(
+         onTap: (){
+           Map map = {"index":index,"list":_anchors};
+           Navigator.pushNamed(context, PhotoPreView.routeName,arguments: map);
+         },
+         child: CachedNetworkImage(
+              imageUrl: _anchors[index].headerIcon,
+              fit: BoxFit.fitWidth,
+            ),
+       );
     });
   }
 }

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mglobalphoto/home/photo_preview.dart';
 import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/search/serarch_serve.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
@@ -85,15 +86,18 @@ class _SearchListViewState extends State<SearchListView> with SingleTickerProvid
       ), 
       itemBuilder: (ctx,index){
         Anchor anchor = _anchors[index];
-        return imgItem(anchor);
+        return imgItem(anchor,index);
       });
   }
 
   // itemView
-  Widget imgItem(Anchor anchor){
+  Widget imgItem(Anchor anchor,int index){
     return GestureDetector(
       child: CachedNetworkImage(imageUrl: anchor.headerIcon,fit: BoxFit.cover,),
-      onTap: (){},
+      onTap: (){
+        Map map = {"index":index,"list":_anchors};
+        Navigator.pushNamed(context,PhotoPreView.routeName,arguments: map);
+      },
     );
   }
   

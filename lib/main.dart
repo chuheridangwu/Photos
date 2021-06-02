@@ -8,7 +8,8 @@ import 'package:mglobalphoto/drawer/drawer.dart';
 import 'package:mglobalphoto/drawer/shuffle_video.dart';
 import 'package:mglobalphoto/drawer/privaty_webview.dart';
 import 'package:mglobalphoto/home/home.dart';
-import 'package:mglobalphoto/home/homg_page_1_list.dart';
+import 'package:mglobalphoto/home/home_page/homg_page_1_list.dart';
+import 'package:mglobalphoto/home/photo_preview.dart';
 import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/search/search_result.dart';
 import 'package:mglobalphoto/style/appconfig.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         HomePageStartList.routeName :(ctx) => HomePageStartList(),
         ShuffleVideoPlay.routeName :(ctx) => ShuffleVideoPlay(),
         PrivatyWebView.routeName :(ctx) => PrivatyWebView(),
+        PhotoPreView.routeName :(ctx) => PhotoPreView(),
       },
     );
   }
@@ -81,7 +83,8 @@ class _MainPageViewState extends State<MainPageView> {
             });
           },
           type: BottomNavigationBarType.fixed,
-          fixedColor: Colors.black,
+          selectedFontSize: 14,
+          selectedItemColor: Colors.black,
           items: navBarItems),
     );
   }
@@ -108,7 +111,7 @@ class _MainPageViewState extends State<MainPageView> {
 
 class MyNavBarItem extends BottomNavigationBarItem {
   MyNavBarItem(String title, IconData icon, IconData activeIcon)
-      : super(label: title, icon: Icon(icon), activeIcon: Icon(activeIcon));
+      : super(label: title, icon: Icon(icon), activeIcon: Icon(activeIcon,));
 }
 
 List<BottomNavigationBarItem> navBarItems = [

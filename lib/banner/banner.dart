@@ -37,7 +37,7 @@ class BannerItemView extends StatelessWidget {
     return GestureDetector(
       onTap: callback,
       child: Container(
-        height: 280,
+        height: 260,
         margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
         decoration: BoxDecoration(
           image: DecorationImage(image: AssetImage(data.icon),fit: BoxFit.cover),
