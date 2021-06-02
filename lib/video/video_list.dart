@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
-import 'package:mglobalphoto/serve/video_serve.dart';
+import 'package:mglobalphoto/video/video_serve.dart';
 import 'package:mglobalphoto/video/video.dart';
 import 'package:mglobalphoto/video/video_play_item.dart';
 import 'package:mglobalphoto/video/video_play_list.dart';

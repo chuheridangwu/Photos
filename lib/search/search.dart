@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:mglobalphoto/search/search_result.dart';
-import 'package:mglobalphoto/serve/serarch_serve.dart';
+import 'package:mglobalphoto/search/serarch_serve.dart';
 import 'package:mglobalphoto/style/button.dart';
 
 class SearchView extends StatefulWidget {

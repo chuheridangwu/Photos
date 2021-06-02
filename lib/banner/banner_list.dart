@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:mglobalphoto/serve/banner_serve.dart';
+import 'package:mglobalphoto/banner/banner_serve.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 

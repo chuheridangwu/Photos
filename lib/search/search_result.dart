@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mglobalphoto/search/search.dart';
-import 'package:mglobalphoto/serve/serarch_serve.dart';
+import 'package:mglobalphoto/search/serarch_serve.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 
 class SearchListView extends StatefulWidget {

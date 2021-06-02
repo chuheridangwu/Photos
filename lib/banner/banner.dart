@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:mglobalphoto/banner/banner_list.dart';
-import 'package:mglobalphoto/serve/banner_serve.dart';
+import 'package:mglobalphoto/banner/banner_serve.dart';
 
 class BannerView extends StatefulWidget {
   @override
