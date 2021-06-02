@@ -68,6 +68,9 @@ class _SearchViewState extends State<SearchView> {
                       Expanded(
                         child: TextField(
                             controller: _controller,
+                            onSubmitted: (value){
+                              Navigator.pushNamed(context, SearchListView.routeName,arguments: value);
+                            },
                             decoration: new InputDecoration(
                               contentPadding: EdgeInsets.fromLTRB(8, 0, 0, 10),
                               hintText: 'Search', border: InputBorder.none),

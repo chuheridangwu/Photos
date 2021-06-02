@@ -15,7 +15,7 @@ class _BannerListViewState extends State<BannerListView> {
   List<Anchor> _anchors = [];
   BannerType _bannerType;
   final BannerServe _serve = BannerServe.initData();
-  RefreshController _refreshController =
+  final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
   @override
@@ -68,7 +68,6 @@ class _BannerListViewState extends State<BannerListView> {
         ),
       ),
       body: SmartRefresher(
-        enablePullDown: true,
         enablePullUp: true,
         onRefresh: refreshData,
         onLoading: loadMoreData,

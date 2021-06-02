@@ -37,38 +37,39 @@ class SearchServe {
       SearchEnum.QIHOO
     ];
     for (var i = 0; i < titles.length; i++) {
-      SearchTypeData typeData = SearchTypeData(titles[i], 0, enums[i]);
+      SearchTypeData typeData = SearchTypeData(titles[i], 0, enums[i], []);
       types.add(typeData);
     }
   }
 
   Future<List<Anchor>> getSearchResult(SearchTypeData typeData) async {
-
     if (typeData.type == SearchEnum.HENGPING) {
-     return  hengpingRequest(typeData);
+      return hengpingRequest(typeData);
     } else if (typeData.type == SearchEnum.SHUPING) {
       return shupingRequest(typeData);
     } else if (typeData.type == SearchEnum.BIZHI) {
-     return bizhiRequest(typeData);
+      return bizhiRequest(typeData);
     } else if (typeData.type == SearchEnum.TOUXIANG) {
-     return touxiangRequest(typeData);
+      return touxiangRequest(typeData);
     } else if (typeData.type == SearchEnum.SOUGOU) {
-     return sougouRequest(typeData);
+      return sougouRequest(typeData);
     } else {
-     return qihooRequest(typeData);
+      return qihooRequest(typeData);
     }
   }
 
   // 横屏
-  Future<List<Anchor>>  hengpingRequest(SearchTypeData typeData) async {
+  Future<List<Anchor>> hengpingRequest(SearchTypeData typeData) async {
     List<Anchor> anchors = [];
     Map<String, dynamic> data = await HttpRequrst.request(typeData.path);
     if (int.parse(data["errno"]) == 0) {
       List<dynamic> items = data["data"];
-      for (var item in items) {
-        Anchor anchor =
-            Anchor(userName: item["utag"], headerIcon: item["img_1024_768"]);
-        anchors.add(anchor);
+      if (items != null) {
+        for (var item in items) {
+          Anchor anchor =
+              Anchor(userName: item["utag"], headerIcon: item["img_1024_768"]);
+          anchors.add(anchor);
+        }
       }
     }
     return anchors;
@@ -81,11 +82,14 @@ class SearchServe {
     String src = await HttpRequrst.requestJsonData(typeData.path);
     Map<String, dynamic> data = jsonDecode(src);
     List<dynamic> items = data["res"]["vertical"];
-    for (var item in items) {
-      Anchor anchor =
-          Anchor(userName: item["form"]["name"], headerIcon: item["img"]);
-      anchors.add(anchor);
+    if (items != null) {
+      for (var item in items) {
+        Anchor anchor =
+            Anchor(userName: item["form"]["name"], headerIcon: item["img"]);
+        anchors.add(anchor);
+      }
     }
+
     return anchors;
   }
 
@@ -93,13 +97,16 @@ class SearchServe {
   Future<List<Anchor>> touxiangRequest(SearchTypeData typeData) async {
     List<Anchor> anchors = [];
 
-    Map<String, dynamic> data = await HttpRequrst.requestJsonData(typeData.path);
+    Map<String, dynamic> data =
+        await HttpRequrst.requestJsonData(typeData.path);
     if (data["code"] == 0) {
       List<dynamic> items = data["res"]["avatar"];
-      for (var item in items) {
-        Anchor anchor =
-            Anchor(userName: item["user"]["name"], headerIcon: item["thumb"]);
-        anchors.add(anchor);
+      if (items != null) {
+        for (var item in items) {
+          Anchor anchor =
+              Anchor(userName: item["user"]["name"], headerIcon: item["thumb"]);
+          anchors.add(anchor);
+        }
       }
     }
     return anchors;
@@ -110,12 +117,14 @@ class SearchServe {
     List<Anchor> anchors = [];
 
     String src = await HttpRequrst.requestJsonData(typeData.path);
-    Map<String, dynamic> data = jsonDecode(src);  
+    Map<String, dynamic> data = jsonDecode(src);
     List<dynamic> items = data["items"];
-    for (var item in items) {
-      Anchor anchor =
-          Anchor(userName: item["title"], headerIcon: item["thumbUrl"]);
-      anchors.add(anchor);
+    if (items != null) {
+      for (var item in items) {
+        Anchor anchor =
+            Anchor(userName: item["title"], headerIcon: item["thumbUrl"]);
+        anchors.add(anchor);
+      }
     }
     return anchors;
   }
@@ -124,13 +133,16 @@ class SearchServe {
   Future<List<Anchor>> bizhiRequest(SearchTypeData typeData) async {
     List<Anchor> anchors = [];
 
-    Map<String, dynamic> data = await HttpRequrst.requestJsonData(typeData.path);
+    Map<String, dynamic> data =
+        await HttpRequrst.requestJsonData(typeData.path);
     if (data["code"] == 200) {
       List<dynamic> items = data["value"]["data"];
-      for (var item in items) {
-        Anchor anchor =
-            Anchor(userName: item["cp_name"], headerIcon: item["small"]);
-        anchors.add(anchor);
+      if (items != null) {
+        for (var item in items) {
+          Anchor anchor =
+              Anchor(userName: item["cp_name"], headerIcon: item["small"]);
+          anchors.add(anchor);
+        }
       }
     }
     return anchors;
@@ -138,7 +150,6 @@ class SearchServe {
 
   // 360搜索
   Future<List<Anchor>> qihooRequest(SearchTypeData typeData) async {
-
     List<Anchor> anchors = [];
 
     String src = await HttpRequrst.requestJsonData(typeData.path);
@@ -146,14 +157,17 @@ class SearchServe {
     Map<String, dynamic> data = jsonDecode(src);
 
     List<dynamic> items = data["list"];
-    for (var item in items) {
-      Anchor anchor = Anchor(
-          userName: item["title"],
-          headerIcon: item["thumb_bak"],
-          width: int.parse(item["width"]),
-          height: int.parse(item["height"]));
-      anchors.add(anchor);
+    if (items != null) {
+      for (var item in items) {
+        Anchor anchor = Anchor(
+            userName: item["title"],
+            headerIcon: item["thumb_bak"],
+            width: int.parse(item["width"]),
+            height: int.parse(item["height"]));
+        anchors.add(anchor);
+      }
     }
+
     return anchors;
   }
 }
@@ -162,30 +176,35 @@ class SearchTypeData {
   String title;
   int skip;
   SearchEnum type;
-  SearchTypeData(this.title, this.skip, this.type);
+  String keyword;
+  List<Anchor> anchors = [];
+  int count = 30;
+  int index = 0;
+  SearchTypeData(this.title, this.skip, this.type, this.anchors,
+      {this.keyword});
 
   get path {
     String src =
-        "http://wallpaper.apc.360.cn/index.php?c=WallPaper&a=search&count=99&kw=美女&start=0";
+        "http://wallpaper.apc.360.cn/index.php?c=WallPaper&a=search&count=99&kw=$keyword&start=$index";
     switch (type) {
       case SearchEnum.SHUPING:
         src =
-            "http://so.picasso.adesk.com/v1/search/vertical/resource/美女?limit=30&channel=m&adult=false&first=0&order=new&skip=0";
+            "http://so.picasso.adesk.com/v1/search/vertical/resource/$keyword?limit=30&channel=m&adult=false&first=0&order=new&skip=$index";
         break;
       case SearchEnum.BIZHI:
         src =
-            "http://api-theme.meizu.com/wallpapers/public/search?os=0&mzos=1.0&screen_size=1x1&language=zh-CN&locale=cn&country=&imei=1&sn=1&device_model=M&firmware=Flyme2.1.2Y&v=5&vc=1&net=wifi&max=30&q=美女&start=0";
+            "http://api-theme.meizu.com/wallpapers/public/search?os=0&mzos=1.0&screen_size=1x1&language=zh-CN&locale=cn&country=&imei=1&sn=1&device_model=M&firmware=Flyme2.1.2Y&v=5&vc=1&net=wifi&max=30&q=$keyword&start=$index";
         break;
       case SearchEnum.SOUGOU:
         src =
-            "https://pic.sogou.com/pics?query=美女&mood=0&picformat=0&mode=1&di=0&p=40030500&dp=1&w=05009900&dr=1&_asf=pic.sogou.com&reqType=ajax&tn=0&reqFrom=result&start=0";
+            "https://pic.sogou.com/pics?query=$keyword&mood=0&picformat=0&mode=1&di=0&p=40030500&dp=1&w=05009900&dr=1&_asf=pic.sogou.com&reqType=ajax&tn=0&reqFrom=result&start=$index";
         break;
       case SearchEnum.TOUXIANG:
         src =
-            "http://service.avatar.adesk.com/v1/avatar/search?key=美女&adult=0&first=1&limit=30&order=&skip=0";
+            "http://service.avatar.adesk.com/v1/avatar/search?key=$keyword&adult=0&first=1&limit=30&order=&skip=$index";
         break;
       case SearchEnum.QIHOO:
-        src = "https://image.so.com/j?src=srp&q=美女&pn=30&sn=0";
+        src = "https://image.so.com/j?src=srp&q=$keyword&pn=30&sn=$index";
         break;
 
       default:
