@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mglobalphoto/drawer/cacheManage.dart';
 import 'package:mglobalphoto/drawer/privaty_webview.dart';
+import 'package:mglobalphoto/drawer/shuffle_photo.dart';
 import 'package:mglobalphoto/drawer/shuffle_video.dart';
 import 'package:mglobalphoto/main.dart';
 import 'package:package_info/package_info.dart';
@@ -79,6 +80,9 @@ class _PhotoDrawerState extends State<PhotoDrawer> {
           
           createRowView(Icons.shuffle, "随机视频", () {
               Navigator.pushNamed(context,ShuffleVideoPlay.routeName);
+           }),
+          createRowView(Icons.image, "随机图片", () {
+              Navigator.pushNamed(context,ShufflePhoto.routeName);
            }),
           createRowView(Icons.cached, "清除缓存", () {
               Future.delayed(Duration(seconds: 1)).then((value){

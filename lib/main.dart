@@ -5,6 +5,8 @@ import 'package:mglobalphoto/banner/banner.dart';
 import 'package:mglobalphoto/banner/banner_list.dart';
 import 'package:mglobalphoto/demo.dart';
 import 'package:mglobalphoto/drawer/drawer.dart';
+import 'package:mglobalphoto/drawer/shuffle_photo.dart';
+import 'package:mglobalphoto/drawer/shuffle_serve.dart';
 import 'package:mglobalphoto/drawer/shuffle_video.dart';
 import 'package:mglobalphoto/drawer/privaty_webview.dart';
 import 'package:mglobalphoto/home/home.dart';
@@ -53,6 +55,7 @@ class MyApp extends StatelessWidget {
         ShuffleVideoPlay.routeName :(ctx) => ShuffleVideoPlay(),
         PrivatyWebView.routeName :(ctx) => PrivatyWebView(),
         PhotoPreView.routeName :(ctx) => PhotoPreView(),
+        ShufflePhoto.routeName :(ctx) => ShufflePhoto(),
       },
     );
   }
