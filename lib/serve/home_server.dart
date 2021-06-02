@@ -17,7 +17,7 @@ class HomeServe {
     List<Anchor> anchors = [];
     if (data["msgCode"] == 0) {
       List<dynamic> items = data["body"]["list"];
-      if (items.length > 0) {
+      if (items != null && items.length > 0) {
         for (var item in items) {
           int uid = item["id"];
           String url = item["url"] + "@235,417.jpg";
