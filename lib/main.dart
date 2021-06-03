@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mglobalphoto/banner/banner.dart';
 import 'package:mglobalphoto/banner/banner_list.dart';
 import 'package:mglobalphoto/demo.dart';
@@ -15,6 +16,7 @@ import 'package:mglobalphoto/home/home_page/home_album_item.dart';
 import 'package:mglobalphoto/home/photo_preview.dart';
 import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/search/search_result.dart';
+import 'package:mglobalphoto/serve/admob_manage.dart';
 import 'package:mglobalphoto/style/appconfig.dart';
 import 'package:mglobalphoto/video/video.dart';
 import 'package:mglobalphoto/video/video_list.dart';
@@ -24,6 +26,7 @@ import 'package:share/share.dart';
 void main() {
   // 进制横屏
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(new MyApp());
@@ -39,6 +42,9 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    AdmobManage();
+
     return MaterialApp(
       title: 'MGlobal Photo',
       debugShowCheckedModeBanner: false,
@@ -107,7 +113,9 @@ class _MainPageViewState extends State<MainPageView> {
         actions: [
           // 分享
           IconButton(icon: Icon(Icons.share), onPressed: (){
-            Share.share('check out my website https://example.com');
+            AdmobManage().showRewardedAd();
+            AdmobManage().showInterstitialAd();
+            // Share.share('check out my website https://example.com');
           })
         ],
       );

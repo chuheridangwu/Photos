@@ -1,8 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mglobalphoto/banner/banner_list.dart';
 import 'package:mglobalphoto/banner/banner_serve.dart';
+import 'package:mglobalphoto/serve/admob_manage.dart';
 
 class BannerView extends StatefulWidget {
   @override
@@ -11,18 +13,46 @@ class BannerView extends StatefulWidget {
 
 class _BannerViewState extends State<BannerView> {
   final BannerServe _serve = BannerServe.initData();
+  BannerAd _anchoredBanner;
+
+  @override
+  void initState() {
+    super.initState();
+    AdmobManage().createAnchoredBanner(context, (ad) {
+      setState(() {
+        _anchoredBanner = ad;
+      });
+     }).then((value){
+       setState(() {
+         
+       });
+     });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: _serve.tabs.length,
-        itemBuilder: (ctx,index){
-          final BannerType type = _serve.tabs[index];
-          return BannerItemView(type,callback: (){
-            Navigator.pushNamed(context, BannerListView.routeName,arguments: type);
-          },);
-      }),
+      body: Column(
+        children:[
+          FutureBuilder(builder: (ctx,asyncs){
+            return  Container(
+                    height: AdSize.banner.height.toDouble(),
+                    width: AdSize.banner.width.toDouble(),
+                    color: Colors.green,
+                    child: AdWidget(ad: _anchoredBanner),
+                  );
+          },),
+          Expanded(
+            child: ListView.builder(
+            itemCount: _serve.tabs.length,
+            itemBuilder: (ctx,index){
+              final BannerType type = _serve.tabs[index];
+              return BannerItemView(type,callback: (){
+                Navigator.pushNamed(context, BannerListView.routeName,arguments: type);
+              },);
+                  }),
+          )],
+      ),
     );
   }
 }
