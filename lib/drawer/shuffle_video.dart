@@ -35,7 +35,6 @@ class _ShuffleVideoPlayState extends State<ShuffleVideoPlay> {
           print("播放器播放视频失败 - ${error.toString()}");
           setState(() {
             _isplay = false;
-            createVideoController();
           });
         });
       _videoController.addListener(() {
@@ -90,8 +89,6 @@ class _ShuffleVideoPlayState extends State<ShuffleVideoPlay> {
         FloatingActionButton(
           heroTag: "2",
           onPressed: () {
-            final oldPlayController = _videoController;
-            oldPlayController.dispose();
             createVideoController();
           },
           child: Icon(Icons.restart_alt),

@@ -21,6 +21,7 @@ class _HomePageAlbumState extends State<HomePageAlbum> with AutomaticKeepAliveCl
     DataManage().albums.then((value){
       setState(() {
         _anchors = value;
+        _anchors.shuffle();
       });
     });
   }

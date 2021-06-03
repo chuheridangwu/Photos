@@ -53,23 +53,28 @@ class _HomeLiveViewState extends State<HomeLiveView> with SingleTickerProviderSt
   // AppBar 设置顶部AppBar
   Widget createAppBar() {
     return PreferredSize(
-      preferredSize: Size.fromHeight(35),
+      preferredSize: Size.fromHeight(44),
       child: AppBar(
         backgroundColor: Colors.white,
         elevation: 0, //隐藏底部阴影分割线
         bottom: TabBar(
           // labelColor: Colors.red,
           indicatorColor: Theme.of(context).primaryColor,
-          // unselectedLabelColor: Colors.blue,
+          unselectedLabelColor: Colors.grey,
           isScrollable: true,
           controller: _tabController,
           tabs: tabs.map((e){
-            return Text(e);
+            return Container(
+              margin: EdgeInsets.only(bottom: 8),
+              child:Text(e)
+            );
           }).toList(),
         ),
       ),
     );
   }
+
+  
 
   // floatingActivitionButton
   Widget floatingBtn() {
