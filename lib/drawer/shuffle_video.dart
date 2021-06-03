@@ -90,10 +90,11 @@ class _ShuffleVideoPlayState extends State<ShuffleVideoPlay> {
         FloatingActionButton(
           heroTag: "2",
           onPressed: () {
-            _videoController.pause();
+            final oldPlayController = _videoController;
+            oldPlayController.dispose();
             createVideoController();
           },
-          child: Icon(Icons.change_history),
+          child: Icon(Icons.restart_alt),
         ),
         SizedBox(
           height: 10,

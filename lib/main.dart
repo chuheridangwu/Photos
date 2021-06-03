@@ -10,7 +10,8 @@ import 'package:mglobalphoto/drawer/shuffle_serve.dart';
 import 'package:mglobalphoto/drawer/shuffle_video.dart';
 import 'package:mglobalphoto/drawer/privaty_webview.dart';
 import 'package:mglobalphoto/home/home.dart';
-import 'package:mglobalphoto/home/home_page/homg_page_1_list.dart';
+import 'package:mglobalphoto/home/home_page/homepage_start_list.dart';
+import 'package:mglobalphoto/home/home_page/homepage_album_item.dart';
 import 'package:mglobalphoto/home/photo_preview.dart';
 import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/search/search_result.dart';
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
         PrivatyWebView.routeName :(ctx) => PrivatyWebView(),
         PhotoPreView.routeName :(ctx) => PhotoPreView(),
         ShufflePhoto.routeName :(ctx) => ShufflePhoto(),
+        HomePageAlbumItem.routeName :(ctx) => HomePageAlbumItem(),
       },
     );
   }

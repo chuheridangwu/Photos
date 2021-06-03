@@ -66,7 +66,7 @@ class _ShufflePhotoState extends State<ShufflePhoto> {
           onPressed: () {
             getPhotoUrl();
           },
-          child: Icon(Icons.change_history),
+          child: Icon(Icons.restart_alt),
         ),
         SizedBox(
           height: 10,
