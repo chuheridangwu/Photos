@@ -12,7 +12,11 @@ class SearchPageView extends StatefulWidget {
   _SearchPageViewState createState() => _SearchPageViewState();
 }
 
-class _SearchPageViewState extends State<SearchPageView> {
+class _SearchPageViewState extends State<SearchPageView> with AutomaticKeepAliveClientMixin {
+ 
+  @override
+  bool get wantKeepAlive => true;
+
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   final SearchServe _serve = SearchServe.initData();

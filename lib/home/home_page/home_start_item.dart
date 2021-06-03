@@ -11,7 +11,8 @@ class HomePageStartList extends StatefulWidget {
   _HomePageStartListState createState() => _HomePageStartListState();
 }
 
-class _HomePageStartListState extends State<HomePageStartList> {
+class _HomePageStartListState extends State<HomePageStartList>{
+
   List<Anchor> _anchors = [];
   Anchor _anchor;
   int _page = 0;

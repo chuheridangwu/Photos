@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mglobalphoto/home/home_page/homepage_start_item.dart';
+import 'package:mglobalphoto/home/home_page/home_start_page.dart';
 import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/serve/data_manage.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 import 'package:mglobalphoto/style/appconfig.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'home_page/home_item.dart';
-import 'home_page/homepage_album_list.dart';
+import 'home_page/home_start_desc.dart';
+import 'home_page/home_album_page.dart';
 
 class HomeLiveView extends StatefulWidget {
   @override

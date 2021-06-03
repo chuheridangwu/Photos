@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:mglobalphoto/home/home_page/home_item.dart';
-import 'package:mglobalphoto/home/home_page/homepage_start_list.dart';
+import 'package:mglobalphoto/home/home_page/home_start_desc.dart';
+import 'package:mglobalphoto/home/home_page/home_start_item.dart';
 import 'package:mglobalphoto/home/home_server.dart';
 import 'package:mglobalphoto/home/photo_preview.dart';
 import 'package:mglobalphoto/serve/source_model.dart';

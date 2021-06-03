@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:mglobalphoto/home/home_page/homepage_album_item.dart';
+import 'package:mglobalphoto/home/home_page/home_album_item.dart';
 import 'package:mglobalphoto/serve/data_manage.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 
@@ -9,7 +9,9 @@ class HomePageAlbum extends StatefulWidget {
   _HomePageAlbumState createState() => _HomePageAlbumState();
 }
 
-class _HomePageAlbumState extends State<HomePageAlbum> {
+class _HomePageAlbumState extends State<HomePageAlbum> with AutomaticKeepAliveClientMixin {
+  
+  bool get wantKeepAlive => true;
 
   List<Anchor> _anchors = [];
 

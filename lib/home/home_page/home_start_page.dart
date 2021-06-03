@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mglobalphoto/home/home_page/home_item.dart';
-import 'package:mglobalphoto/home/home_page/homepage_start_list.dart';
+import 'package:mglobalphoto/home/home_page/home_start_desc.dart';
+import 'package:mglobalphoto/home/home_page/home_start_item.dart';
 import 'package:mglobalphoto/serve/data_manage.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -10,8 +10,8 @@ class HomePageView extends StatefulWidget {
   _HomePageViewState createState() => _HomePageViewState();
 }
 
-class _HomePageViewState extends State<HomePageView> {
-
+class _HomePageViewState extends State<HomePageView> with AutomaticKeepAliveClientMixin {
+  bool get wantKeepAlive => true;
   List<Anchor> anchorList = [];
 
 
