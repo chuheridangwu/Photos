@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mglobalphoto/drawer/shuffle_serve.dart';
+import 'package:mglobalphoto/serve/admob_manage.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -25,7 +26,7 @@ class _ShufflePhotoState extends State<ShufflePhoto> {
 
   // 获取图片数据
   void getPhotoUrl() {
-    if (_count <= 15) {
+    if (_count <= 11) {
       _serve.getShufflePhoto().then((value) {
         setState(() {
           _anchor = value;
@@ -38,6 +39,10 @@ class _ShufflePhotoState extends State<ShufflePhoto> {
           _anchor = value;
         });
       });
+    }
+
+    if (_count%20 == 0) {
+      AdmobManage().showRewardedAd();
     }
   }
 

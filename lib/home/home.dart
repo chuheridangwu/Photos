@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mglobalphoto/home/home_page/home_all_page.dart';
+import 'package:mglobalphoto/home/home_page/home_avatar_page.dart';
 import 'package:mglobalphoto/home/home_page/home_start_page.dart';
 import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/serve/data_manage.dart';
@@ -18,8 +19,8 @@ class HomeLiveView extends StatefulWidget {
   _HomeLiveViewState createState() => _HomeLiveViewState();
 }
 
-class _HomeLiveViewState extends State<HomeLiveView> with SingleTickerProviderStateMixin {
-
+class _HomeLiveViewState extends State<HomeLiveView>
+    with SingleTickerProviderStateMixin {
   // 切换大小图
   int _rowCount = 2;
   //需要定义一个Controller
@@ -48,8 +49,11 @@ class _HomeLiveViewState extends State<HomeLiveView> with SingleTickerProviderSt
               if (e == "分类") {
                 return HomePageClassify();
               }
-               if (e == "大全") {
+              if (e == "大全") {
                 return HomePageAll();
+              }
+              if (e == "头像") {
+                return HomePageAvatar();
               }
               return HomePageView();
             }).toList()),
@@ -71,18 +75,14 @@ class _HomeLiveViewState extends State<HomeLiveView> with SingleTickerProviderSt
           unselectedLabelColor: Colors.grey,
           isScrollable: true,
           controller: _tabController,
-          tabs: tabs.map((e){
+          tabs: tabs.map((e) {
             return Container(
-              margin: EdgeInsets.only(bottom: 8),
-              child:Text(e)
-            );
+                margin: EdgeInsets.only(bottom: 8), child: Text(e));
           }).toList(),
         ),
       ),
     );
   }
-
-  
 
   // floatingActivitionButton
   Widget floatingBtn() {

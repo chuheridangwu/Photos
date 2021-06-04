@@ -119,6 +119,26 @@ class HomeServe {
     }
     return anchors;
   }
+
+  // 获取某个头像数据
+    static Future<List<Anchor>> getAvatarList(int index) async {
+    Map<String, dynamic> data = await HttpRequrst.request(
+        "http://service.picasso.adesk.com/v1/avatar/avatar?limit=30&adult=false&first=1&order=hot&cid=55f7d53769401b2286e9e497&skip=$index");
+    List<Anchor> anchors = [];
+    if (data["msg"] == "success") {
+      List<dynamic> items = data["res"]["avatar"];
+      if (items != null) {
+        for (var item in items) {
+          Anchor anchor = Anchor(
+            thumb: item["thumb"],
+            headerIcon: item["thumb"]
+          );
+          anchors.add(anchor);
+        }
+      }
+    }
+    return anchors;
+  }
 }
 
 /*

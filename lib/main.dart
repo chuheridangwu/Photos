@@ -85,7 +85,7 @@ class _MainPageViewState extends State<MainPageView> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Future.delayed(Duration(seconds: 5)).then((value) =>  AdmobManage().showRewardedAd());
+    Future.delayed(Duration(seconds: 5)).then((value) =>  AdmobManage().showInterstitialAd());
   }
 
   @override

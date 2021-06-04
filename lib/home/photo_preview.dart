@@ -33,7 +33,7 @@ class _PhotoPreViewState extends State<PhotoPreView> {
     _pageController.addListener(() {
       print(_pageController.page);
       if (_pageController.page % 20 == 0) {
-        AdmobManage().showInterstitialAd();
+        AdmobManage().showRewardedAd();
       }
     });
     setState(() {});

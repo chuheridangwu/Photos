@@ -30,15 +30,16 @@ class ShuffleServe {
       return _anchors[_index];
     }
     _anchors = [];
+    int index = Random().nextInt(30);
     String src = await HttpRequrst.request(
-        "https://image.so.com/j?src=srp&q=%E6%80%A7%E6%84%9F%E7%BE%8E%E5%A5%B3&pn=30&sn=0");
+        "https://image.so.com/j?src=srp&q=%E6%80%A7%E6%84%9F%E7%BE%8E%E5%A5%B3&pn=30&sn=$index");
     Map map = jsonDecode(src);
     List items = map["list"];
     for (var item in items) {
       final Anchor anchor = Anchor(headerIcon: item["thumb"]);
       _anchors.add(anchor);
     }
-
+    _anchors.shuffle();
     Anchor ramAnchor = _anchors[_index];
     return ramAnchor;
   }
