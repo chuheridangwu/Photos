@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mglobalphoto/drawer/shuffle_serve.dart';
+import 'package:mglobalphoto/home/home_server.dart';
 import 'package:mglobalphoto/serve/admob_manage.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 import 'package:photo_view/photo_view.dart';
@@ -26,22 +27,25 @@ class _ShufflePhotoState extends State<ShufflePhoto> {
 
   // 获取图片数据
   void getPhotoUrl() {
-    if (_count <= 11) {
-      _serve.getShufflePhoto().then((value) {
-        setState(() {
-          _anchor = value;
-          _count += 1;
+    HomeServe.isLoadMoreData().then((value) {
+      int type = value["app"];
+      if (type == 1) {
+        _serve.getShufflePhoto().then((value) {
+          setState(() {
+            _anchor = value;
+          });
         });
-      });
-    } else {
-      _serve.getShuffleSeexPhoto().then((value) {
-        setState(() {
-          _anchor = value;
+      } else {
+        _serve.getShuffleSeexPhoto().then((value) {
+          setState(() {
+            _anchor = value;
+          });
         });
-      });
-    }
+      }
+    });
 
-    if (_count%20 == 0) {
+    _count += 1;
+    if (_count % 20 == 0) {
       AdmobManage().showRewardedAd();
     }
   }
@@ -50,13 +54,14 @@ class _ShufflePhotoState extends State<ShufflePhoto> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: _anchor != null ?  PhotoView(
-            
-            imageProvider: CachedNetworkImageProvider(_anchor.headerIcon),
-            loadingBuilder: (ctx, event) {
-              return Container();
-            },
-          ) : Container(),
+      body: _anchor != null
+          ? PhotoView(
+              imageProvider: CachedNetworkImageProvider(_anchor.headerIcon),
+              loadingBuilder: (ctx, event) {
+                return Container();
+              },
+            )
+          : Container(),
       floatingActionButton: createFloatingBtn(),
     );
   }

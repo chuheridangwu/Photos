@@ -29,6 +29,7 @@ class _HomeClassifyTabbarState extends State<HomeClassifyTabbar> with SingleTick
           return Text(_anchor.userName);
         },),
         bottom: TabBar(
+          labelStyle: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),
           controller: _tabController,
           tabs: _tabs.map((e){
             return Tab(text: e,);

@@ -17,11 +17,14 @@ class _HomePageClassifyState extends State<HomePageClassify> {
   @override
   void initState() {
     super.initState();
-    HomeServe.getClassifyData().then((value){
+    HomeServe.isLoadMoreData().then((value){
+         HomeServe.getClassifyData(value["app"]).then((value){
       setState(() {
         _anchors = value;
       });
     });
+    });
+ 
   }
   
   @override

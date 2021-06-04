@@ -59,8 +59,11 @@ class HomeServe {
     return anchors;
   }
 
-   // 获取分类数据
-  static Future<List<Anchor>> getClassifyData() async {
+  static Future<Map> isLoadMoreData() async {
+    return await HttpRequrst.request("https://pandaboy.top/config.json");
+  }
+   // 获取分类数据 如果index == 1 显示分类
+  static Future<List<Anchor>> getClassifyData(int index) async {
     Map<String, dynamic> data = await HttpRequrst.request(
         "http://service.aibizhi.adesk.com/v1/wallpaper/category");
     List<Anchor> anchors = [];
@@ -73,6 +76,10 @@ class HomeServe {
             strUid: item["id"],
             headerIcon: item["cover"],
           );
+          if ((anchor.strUid == "4e4d610cdf714d2966000000" && index == 1) || 
+              (anchor.strUid == "4e4d610cdf714d2966000007" && index == 1)) {
+            continue;
+          }
           anchors.add(anchor);
         }
       }

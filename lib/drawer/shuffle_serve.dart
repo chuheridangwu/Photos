@@ -32,7 +32,7 @@ class ShuffleServe {
     _anchors = [];
     int index = Random().nextInt(30);
     String src = await HttpRequrst.request(
-        "https://image.so.com/j?src=srp&q=%E6%80%A7%E6%84%9F%E7%BE%8E%E5%A5%B3&pn=30&sn=$index");
+        "https://image.so.com/j?src=srp&q=%E6%B0%94%E8%B4%A8%E7%BE%8E%E5%A5%B3&pn=30&sn=$index");
     Map map = jsonDecode(src);
     List items = map["list"];
     for (var item in items) {
