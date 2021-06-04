@@ -68,7 +68,7 @@ class _TabbarBgColorTesttate extends State<TabbarBgColorTest> with SingleTickerP
           )
         ],
         currentIndex: _selectedIndex,
-        fixedColor: Colors.green,
+        fixedColor: Colors.white,
         onTap: (index){
           setState(() {
             _selectedIndex = index;

@@ -62,7 +62,7 @@ class _VideoListViewState extends State<VideoListView> {
             ? Container(
                 height: AdSize.banner.height.toDouble(),
                 width: AdSize.banner.width.toDouble(),
-                color: Colors.green,
+                color: Colors.white,
                 child: AdWidget(ad: _anchoredBanner),
               )
             : Container(),

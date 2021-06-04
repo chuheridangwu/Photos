@@ -32,6 +32,21 @@ class AdmobManage {
 
   BannerAd _anchoredBanner;
 
+  // 插页式广告 正式id
+  static final String InterstitialAdId = Platform.isAndroid
+      ? 'ca-app-pub-8177181808824082~1835992869'
+      : 'ca-app-pub-8177181808824082/3045132756';
+
+  // 激励视频 正式id
+  static final String RewardedAdId = Platform.isAndroid
+      ? 'ca-app-pub-8177181808824082~1835992869'
+      : 'ca-app-pub-8177181808824082/9310910780';
+
+  // 横幅广告 正式id
+  static final String BannerAdId = Platform.isAndroid
+      ? 'ca-app-pub-8177181808824082~1835992869'
+      : 'ca-app-pub-8177181808824082/9766453778';
+
   // 创建插页广告
   void _createInterstitialAd() {
     InterstitialAd.load(
@@ -143,9 +158,7 @@ class AdmobManage {
     final BannerAd banner = BannerAd(
       size: size,
       request: AdRequest(),
-      adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-3940256099942544/6300978111'
-          : 'ca-app-pub-3940256099942544/2934735716',
+      adUnitId: BannerAd.testAdUnitId,
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
           // 加载完成

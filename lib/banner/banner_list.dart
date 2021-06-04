@@ -51,9 +51,9 @@ class _BannerListViewState extends State<BannerListView> {
       setState(() {
         if (_bannerType.start > 0) {
           _anchors.addAll(value);
-          _anchors.shuffle();
         } else {
           _anchors = value;
+          _anchors.shuffle();
         }
       });
     });
@@ -77,7 +77,7 @@ class _BannerListViewState extends State<BannerListView> {
               ? Container(
                   height: AdSize.banner.height.toDouble(),
                   width: AdSize.banner.width.toDouble(),
-                  color: Colors.green,
+                  color: Colors.white,
                   child: AdWidget(ad: _anchoredBanner),
                 )
               : Container(),

@@ -71,7 +71,7 @@ class _HomePageStartListState extends State<HomePageStartList> {
               ? Container(
                   height: AdSize.banner.height.toDouble(),
                   width: AdSize.banner.width.toDouble(),
-                  color: Colors.green,
+                  color: Colors.white,
                   child: AdWidget(ad: _anchoredBanner),
                 )
               : Container(),
