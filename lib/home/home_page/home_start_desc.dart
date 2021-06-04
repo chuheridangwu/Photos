@@ -17,7 +17,7 @@ class HomeItem extends StatelessWidget {
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: CachedNetworkImageProvider(anchor.headerIcon),
-                  fit: BoxFit.fill)),
+                  fit: BoxFit.cover)),
           child: bottomWidget(),
         ),
       ),

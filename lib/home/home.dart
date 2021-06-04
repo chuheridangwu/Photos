@@ -8,6 +8,7 @@ import 'package:mglobalphoto/serve/source_model.dart';
 import 'package:mglobalphoto/style/appconfig.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import 'home_page/home_classify_page.dart';
 import 'home_page/home_start_desc.dart';
 import 'home_page/home_album_page.dart';
 
@@ -42,6 +43,9 @@ class _HomeLiveViewState extends State<HomeLiveView> with SingleTickerProviderSt
             children: tabs.map((e) {
               if (e == "专题") {
                 return HomePageAlbum();
+              }
+              if (e == "分类") {
+                return HomePageClassify();
               }
               return HomePageView();
             }).toList()),

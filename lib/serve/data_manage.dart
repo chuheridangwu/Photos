@@ -44,7 +44,7 @@ class DataManage {
     for (var item in items) {
       String name = item["title"];
       String url = item["img"];
-      Anchor anchor = Anchor(pathID: item["uid"],userName: name,headerIcon: url,desc: item["desc"]);
+      Anchor anchor = Anchor(strUid: item["uid"],userName: name,headerIcon: url,desc: item["desc"]);
       anchors.add(anchor);
     }
     return  anchors;

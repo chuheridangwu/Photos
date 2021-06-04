@@ -51,7 +51,7 @@ class _HomePageAlbumItemState extends State<HomePageAlbumItem> {
 
   // 网络请求
   void requestData() {
-    _serve.getAlbumList(_anchor.pathID, _index).then((value) {
+    _serve.getAlbumList(_anchor.strUid, _index).then((value) {
       setState(() {
         if (_index == 0) {
           _anchors = value;
