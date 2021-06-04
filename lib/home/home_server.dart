@@ -99,6 +99,26 @@ class HomeServe {
     }
     return anchors;
   }
+
+  // 获取美女大全中的数据  气质美女 侧颜美女 俏皮美女
+  static Future<List<Anchor>> getAllList(String key,int skip,{String desc="hot"}) async {
+    Map<String, dynamic> data = await HttpRequrst.request(
+        "http://service.aibizhi.adesk.com/v1/wallpaper/album/$key/wallpaper?limit=30&adult=false&first=1&order=$desc&skip=$skip");
+    List<Anchor> anchors = [];
+    if (data["msg"] == "success") {
+      List<dynamic> items = data["res"]["wallpaper"];
+      if (items != null) {
+        for (var item in items) {
+          Anchor anchor = Anchor(
+            thumb: item["thumb"],
+            headerIcon: item["img"]
+          );
+          anchors.add(anchor);
+        }
+      }
+    }
+    return anchors;
+  }
 }
 
 /*
@@ -117,4 +137,8 @@ http://service.aibizhi.adesk.com/v1/wallpaper/category
 // 获取某一个分类下的数据
 http://service.picasso.adesk.com/v1/vertical/category/4ef0a35c0569795756000000/vertical?limit=30&adult=false&first=1&order=new
 http://service.picasso.adesk.com/v1/vertical/category/4ef0a35c0569795756000000/vertical?limit=30&adult=false&first=1&order=hot
+
+// 美女数据 纯净美女  侧面美女
+http://service.aibizhi.adesk.com/v1/wallpaper/album/546c9c1469401b234606da56/wallpaper?limit=30&adult=false&first=1&order=new&skip=30
+
 */

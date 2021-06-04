@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mglobalphoto/home/home_page/home_all_page.dart';
 import 'package:mglobalphoto/home/home_page/home_start_page.dart';
 import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/serve/data_manage.dart';
@@ -46,6 +47,9 @@ class _HomeLiveViewState extends State<HomeLiveView> with SingleTickerProviderSt
               }
               if (e == "分类") {
                 return HomePageClassify();
+              }
+               if (e == "大全") {
+                return HomePageAll();
               }
               return HomePageView();
             }).toList()),

@@ -24,6 +24,8 @@ import 'package:mglobalphoto/video/video_list.dart';
 import 'package:mglobalphoto/video/video_play_list.dart';
 import 'package:share/share.dart';
 
+import 'home/home_page/home_all_item.dart';
+
 void main() {
   // 进制横屏
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,6 +68,7 @@ class MyApp extends StatelessWidget {
         ShufflePhoto.routeName :(ctx) => ShufflePhoto(),
         HomePageAlbumItem.routeName :(ctx) => HomePageAlbumItem(),
         HomeClassifyTabbar.routeName :(ctx) => HomeClassifyTabbar(),
+        HomeAllItem.routeName :(ctx) => HomeAllItem(),
       },
     );
   }
