@@ -78,6 +78,12 @@ class _MainPageViewState extends State<MainPageView> {
   int _currentIndex = 0;
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    Future.delayed(Duration(seconds: 5)).then((value) =>  AdmobManage().showRewardedAd());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: createAppbar(),
@@ -113,9 +119,7 @@ class _MainPageViewState extends State<MainPageView> {
         actions: [
           // 分享
           IconButton(icon: Icon(Icons.share), onPressed: (){
-            AdmobManage().showRewardedAd();
-            AdmobManage().showInterstitialAd();
-            // Share.share('check out my website https://example.com');
+            Share.share('check out my website https://example.com');
           })
         ],
       );

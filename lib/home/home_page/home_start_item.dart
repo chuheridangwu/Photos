@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mglobalphoto/home/home_server.dart';
 import 'package:mglobalphoto/home/photo_preview.dart';
+import 'package:mglobalphoto/serve/admob_manage.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -11,8 +13,7 @@ class HomePageStartList extends StatefulWidget {
   _HomePageStartListState createState() => _HomePageStartListState();
 }
 
-class _HomePageStartListState extends State<HomePageStartList>{
-
+class _HomePageStartListState extends State<HomePageStartList> {
   List<Anchor> _anchors = [];
   Anchor _anchor;
   int _page = 0;
@@ -20,11 +21,17 @@ class _HomePageStartListState extends State<HomePageStartList>{
   // 监听滑动
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
+  BannerAd _anchoredBanner;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _anchor = ModalRoute.of(context).settings.arguments as Anchor;
+    AdmobManage().createAnchoredBanner(context, (ad) {
+      setState(() {
+        _anchoredBanner = ad;
+      });
+    });
     requestData();
   }
 
@@ -58,7 +65,19 @@ class _HomePageStartListState extends State<HomePageStartList>{
           },
         ),
       ),
-      body: createSmartView(),
+      body: Column(
+        children: [
+          _anchoredBanner != null
+              ? Container(
+                  height: AdSize.banner.height.toDouble(),
+                  width: AdSize.banner.width.toDouble(),
+                  color: Colors.green,
+                  child: AdWidget(ad: _anchoredBanner),
+                )
+              : Container(),
+          Expanded(child: createSmartView())
+        ],
+      ),
     );
   }
 
@@ -88,8 +107,9 @@ class _HomePageStartListState extends State<HomePageStartList>{
           final anchor = _anchors[index];
           return GestureDetector(
             onTap: () {
-              Map map = {"index":index,"list":_anchors};
-              Navigator.pushNamed(context, PhotoPreView.routeName,arguments: map);
+              Map map = {"index": index, "list": _anchors};
+              Navigator.pushNamed(context, PhotoPreView.routeName,
+                  arguments: map);
             },
             child: CachedNetworkImage(
               placeholder: (context, url) => Container(),

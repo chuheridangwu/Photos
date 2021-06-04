@@ -13,8 +13,8 @@ class AdmobManage {
   static AdmobManage _admobManage = AdmobManage._();
 
   AdmobManage._() {
-     createInterstitialAd();
-     createRewardedAd();
+    _createInterstitialAd();
+    _createRewardedAd();
   }
 
   static AdmobManage _shareInstance() {
@@ -31,10 +31,9 @@ class AdmobManage {
   int _numRewardedLoadAttempts = 0;
 
   BannerAd _anchoredBanner;
-  bool _loadingAnchoredBanner = false;
 
-    // 创建插页广告
-    void createInterstitialAd() {
+  // 创建插页广告
+  void _createInterstitialAd() {
     InterstitialAd.load(
         adUnitId: InterstitialAd.testAdUnitId,
         request: AdRequest(),
@@ -49,7 +48,7 @@ class AdmobManage {
             _numInterstitialLoadAttempts += 1;
             _interstitialAd = null;
             if (_numInterstitialLoadAttempts <= maxFailedLoadAttempts) {
-              createInterstitialAd();
+              _createInterstitialAd();
             }
           },
         ));
@@ -67,12 +66,12 @@ class AdmobManage {
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
         print('$ad onAdDismissedFullScreenContent.');
         ad.dispose();
-        createInterstitialAd();
+        _createInterstitialAd();
       },
       onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
         print('$ad onAdFailedToShowFullScreenContent: $error');
         ad.dispose();
-        createInterstitialAd();
+        _createInterstitialAd();
       },
     );
     _interstitialAd.show();
@@ -80,7 +79,7 @@ class AdmobManage {
   }
 
   // 创建视频激励广告
-   void createRewardedAd() {
+  void _createRewardedAd() {
     RewardedAd.load(
         adUnitId: RewardedAd.testAdUnitId,
         request: AdRequest(),
@@ -95,7 +94,7 @@ class AdmobManage {
             _rewardedAd = null;
             _numRewardedLoadAttempts += 1;
             if (_numRewardedLoadAttempts <= maxFailedLoadAttempts) {
-              createRewardedAd();
+              _createRewardedAd();
             }
           },
         ));
@@ -112,12 +111,12 @@ class AdmobManage {
       onAdDismissedFullScreenContent: (RewardedAd ad) {
         print('$ad onAdDismissedFullScreenContent.');
         ad.dispose();
-        createRewardedAd();
+        _createRewardedAd();
       },
       onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
         print('$ad onAdFailedToShowFullScreenContent: $error');
         ad.dispose();
-        createRewardedAd();
+        _createRewardedAd();
       },
     );
 
@@ -128,7 +127,8 @@ class AdmobManage {
   }
 
   // 创建 banner广告
-    Future<void> createAnchoredBanner(BuildContext context,AdEventCallback callback)async {
+  Future<void> createAnchoredBanner(
+      BuildContext context, AdEventCallback callback) async {
     final AnchoredAdaptiveBannerAdSize size =
         await AdSize.getAnchoredAdaptiveBannerAdSize(
       Orientation.portrait,
@@ -147,7 +147,8 @@ class AdmobManage {
           ? 'ca-app-pub-3940256099942544/6300978111'
           : 'ca-app-pub-3940256099942544/2934735716',
       listener: BannerAdListener(
-        onAdLoaded: (Ad ad) { // 加载完成
+        onAdLoaded: (Ad ad) {
+          // 加载完成
           print('$BannerAd loaded.');
           callback(ad);
         },
@@ -162,7 +163,7 @@ class AdmobManage {
     return banner.load();
   }
 
-  void dispose(){
+  void dispose() {
     _interstitialAd?.dispose();
     _rewardedAd?.dispose();
     _anchoredBanner?.dispose();

@@ -91,7 +91,7 @@ class _ShuffleVideoPlayState extends State<ShuffleVideoPlay> {
           onPressed: () {
             createVideoController();
           },
-          child: Icon(Icons.restart_alt),
+          child: Icon(Icons.refresh_sharp),
         ),
         SizedBox(
           height: 10,

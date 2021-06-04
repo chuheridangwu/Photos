@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:mglobalphoto/serve/admob_manage.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 import 'package:mglobalphoto/video/video_serve.dart';
 import 'package:mglobalphoto/video/video.dart';
@@ -17,6 +19,7 @@ class _VideoListViewState extends State<VideoListView> {
   final VideoServe _serve = VideoServe();
   VideoTypeData _typeData;
   List<Anchor> _anchors = [];
+  BannerAd _anchoredBanner;
 
   @override
   void initState() {
@@ -27,6 +30,16 @@ class _VideoListViewState extends State<VideoListView> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _typeData = ModalRoute.of(context).settings.arguments as VideoTypeData;
+
+    AdmobManage().createAnchoredBanner(context, (ad) {
+      setState(() {
+        _anchoredBanner = ad;
+      });
+    });
+    refreshData();
+  }
+
+  void refreshData() {
     _serve.getVideoListData(_typeData.path).then((value) {
       _anchors = value;
       _anchors.shuffle();
@@ -44,7 +57,17 @@ class _VideoListViewState extends State<VideoListView> {
           },
         ),
       ),
-      body: createGridView(),
+      body: Column(children: [
+        _anchoredBanner != null
+            ? Container(
+                height: AdSize.banner.height.toDouble(),
+                width: AdSize.banner.width.toDouble(),
+                color: Colors.green,
+                child: AdWidget(ad: _anchoredBanner),
+              )
+            : Container(),
+        Expanded(child: createGridView())
+      ]),
     );
   }
 
@@ -82,8 +105,7 @@ class VideoTypeItem extends StatelessWidget {
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: CachedNetworkImageProvider(data.headerIcon),
-                  fit: BoxFit.cover)
-                  ),
+                  fit: BoxFit.cover)),
           child: bottomWidget(),
         ),
       ),
