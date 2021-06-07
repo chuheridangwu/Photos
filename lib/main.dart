@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mglobalphoto/banner/banner.dart';
 import 'package:mglobalphoto/banner/banner_list.dart';
@@ -24,6 +25,7 @@ import 'package:mglobalphoto/video/video_list.dart';
 import 'package:mglobalphoto/video/video_play_list.dart';
 import 'package:share/share.dart';
 
+import 'generated/l10n.dart';
 import 'home/home_page/home_all_item.dart';
 
 void main() {
@@ -42,34 +44,46 @@ void main() {
   });
 }
 
+final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     AdmobManage();
     AppConfig();
 
     return MaterialApp(
       title: 'MGlobal Photo',
+      localeListResolutionCallback: (_,local){
+        return Locale("en");
+      },
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate, // 指定本地化的字符串和一些其他的值
+        GlobalCupertinoLocalizations.delegate, // 对应的Cupertino风格
+        GlobalWidgetsLocalizations.delegate, // 指定默认的文本排列方向, 由左到右或由右到左
+        S.delegate
+      ],
+      supportedLocales: S.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
+      navigatorKey: navigatorKey,
       theme: ThemeData(
         primarySwatch: Colors.yellow,
       ),
       home: MainPageView(),
       routes: {
-        SearchView.routeName :(ctx) => SearchView(),
-        SearchListView.routeName :(ctx) => SearchListView(),
-        VideoListView.routeName :(ctx) => VideoListView(),
-        VideoPlayListView.routeName : (ctx) => VideoPlayListView(),
-        BannerListView.routeName :(ctx) => BannerListView(),
-        HomePageStartList.routeName :(ctx) => HomePageStartList(),
-        ShuffleVideoPlay.routeName :(ctx) => ShuffleVideoPlay(),
-        PrivatyWebView.routeName :(ctx) => PrivatyWebView(),
-        PhotoPreView.routeName :(ctx) => PhotoPreView(),
-        ShufflePhoto.routeName :(ctx) => ShufflePhoto(),
-        HomePageAlbumItem.routeName :(ctx) => HomePageAlbumItem(),
-        HomeClassifyTabbar.routeName :(ctx) => HomeClassifyTabbar(),
-        HomeAllItem.routeName :(ctx) => HomeAllItem(),
+        SearchView.routeName: (ctx) => SearchView(),
+        SearchListView.routeName: (ctx) => SearchListView(),
+        VideoListView.routeName: (ctx) => VideoListView(),
+        VideoPlayListView.routeName: (ctx) => VideoPlayListView(),
+        BannerListView.routeName: (ctx) => BannerListView(),
+        HomePageStartList.routeName: (ctx) => HomePageStartList(),
+        ShuffleVideoPlay.routeName: (ctx) => ShuffleVideoPlay(),
+        PrivatyWebView.routeName: (ctx) => PrivatyWebView(),
+        PhotoPreView.routeName: (ctx) => PhotoPreView(),
+        ShufflePhoto.routeName: (ctx) => ShufflePhoto(),
+        HomePageAlbumItem.routeName: (ctx) => HomePageAlbumItem(),
+        HomeClassifyTabbar.routeName: (ctx) => HomeClassifyTabbar(),
+        HomeAllItem.routeName: (ctx) => HomeAllItem(),
       },
     );
   }
@@ -86,7 +100,8 @@ class _MainPageViewState extends State<MainPageView> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Future.delayed(Duration(seconds: 5)).then((value) =>  AdmobManage().showInterstitialAd());
+    Future.delayed(Duration(seconds: 5))
+        .then((value) => AdmobManage().showInterstitialAd());
   }
 
   @override
@@ -113,35 +128,43 @@ class _MainPageViewState extends State<MainPageView> {
   }
 
   // APPBar
-  Widget createAppbar(){
+  Widget createAppbar() {
     return AppBar(
-        title: Text("MGlobal Photo"),
-        elevation: 0,//隐藏底部阴影分割线
-        leading: Builder(builder: (ctx){
-          return IconButton(icon: Icon(Icons.list), onPressed: (){
-            Scaffold.of(ctx).openDrawer();
-          });
-        }),
-        actions: [
-          // 分享
-          IconButton(icon: Icon(Icons.share), onPressed: (){
-            Share.share('check out my website https://example.com');
-          })
-        ],
-      );
+      title: Text(S.of(context).home),
+      elevation: 0, //隐藏底部阴影分割线
+      leading: Builder(builder: (ctx) {
+        return IconButton(
+            icon: Icon(Icons.list),
+            onPressed: () {
+              Scaffold.of(ctx).openDrawer();
+            });
+      }),
+      actions: [
+        // 分享
+        IconButton(
+            icon: Icon(Icons.share),
+            onPressed: () {
+              Share.share('check out my website https://example.com');
+            })
+      ],
+    );
   }
 }
 
 class MyNavBarItem extends BottomNavigationBarItem {
   MyNavBarItem(String title, IconData icon, IconData activeIcon)
-      : super(label: title, icon: Icon(icon), activeIcon: Icon(activeIcon,));
+      : super(
+            label: title,
+            icon: Icon(icon),
+            activeIcon: Icon(
+              activeIcon,
+            ));
 }
 
 List<BottomNavigationBarItem> navBarItems = [
-  MyNavBarItem("首页", Icons.home, Icons.home_outlined),
-  MyNavBarItem("视频", Icons.play_circle_fill, Icons.play_circle_outline),
-  MyNavBarItem("横幅", Icons.view_headline, Icons.view_headline),
-
+  MyNavBarItem(S.of(navigatorKey.currentContext).home, Icons.home, Icons.home_outlined),
+  MyNavBarItem(S.of(navigatorKey.currentContext).video, Icons.play_circle_fill, Icons.play_circle_outline),
+  MyNavBarItem(S.of(navigatorKey.currentContext).banner, Icons.view_headline, Icons.view_headline),
 ];
 
 List<Widget> pages = [

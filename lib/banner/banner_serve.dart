@@ -2,13 +2,29 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/services.dart';
+import 'package:mglobalphoto/generated/l10n.dart';
+import 'package:mglobalphoto/main.dart';
 import 'package:mglobalphoto/serve/http_request.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 
 class BannerServe{
   List<BannerType> tabs = [];  
   BannerServe.initData(){
-    List titles = ["文艺美女","风景名画","视觉创意","明星影视","汽车","萌宠动物","小清新","体育","军事","动漫卡通","情感","文字"];
+    final context = navigatorKey.currentContext;
+    List titles = [
+      S.of(context).banner_1,
+      S.of(context).banner_2,
+      S.of(context).banner_3,
+      S.of(context).banner_4,
+      S.of(context).banner_5,
+      S.of(context).banner_6,
+      S.of(context).banner_7,
+      S.of(context).banner_8,
+      S.of(context).banner_9,
+      S.of(context).banner_10,
+      S.of(context).banner_11,
+      S.of(context).banner_12,
+      ];
     List ids = [6,9,10,11,12,14,15,16,22,26,30,35];
     for (var i = 0; i < titles.length; i++) {
       BannerType banner = BannerType(titles[i],"images/banner/banner_type_$i.jpg",ids[i]);

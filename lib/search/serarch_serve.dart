@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:mglobalphoto/generated/l10n.dart';
+import 'package:mglobalphoto/main.dart';
 import 'package:mglobalphoto/serve/http_request.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 
@@ -27,7 +29,13 @@ class SearchServe {
 
   List<SearchTypeData> types = [];
   SearchServe.initData() {
-    List titles = ["横屏", "竖屏", "壁纸", "头像", "搜狗", "360"];
+    final context = navigatorKey.currentContext;
+    List titles = [S.of(context).search_heng, 
+    S.of(context).search_shu, 
+    S.of(context).search_bizhi, 
+    S.of(context).search_icon, 
+    S.of(context).search_sougou, 
+    S.of(context).search_360];
     List enums = [
       SearchEnum.HENGPING,
       SearchEnum.SHUPING,

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:core';
 
 import 'package:flutter/services.dart';
+import 'package:mglobalphoto/generated/l10n.dart';
+import 'package:mglobalphoto/main.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 
 class VideoServe{
@@ -11,8 +13,25 @@ class VideoServe{
 
   // 初始化
   VideoServe.initData(){
-    List titles = ["跑马灯","风景建筑","经典影视","动物萌宠","唯美动态","抖音网红","情侣爱情","文字控","炫酷创意","火爆游戏","卡通动漫","娱乐明星","男人","明星","其他"];
-    for (var i = 0; i < titles.length; i++) {
+    final context = navigatorKey.currentContext;
+    List titles = [
+      S.of(context).video_1,
+      S.of(context).video_2,
+      S.of(context).video_3,
+      S.of(context).video_4,
+      S.of(context).video_5,
+      S.of(context).video_6,
+      S.of(context).video_7,
+      S.of(context).video_8,
+      S.of(context).video_9,
+      S.of(context).video_10,
+      S.of(context).video_11,
+      S.of(context).video_12,
+      S.of(context).video_13,
+      S.of(context).video_14,
+      S.of(context).video_15,
+    ];
+     for (var i = 0; i < titles.length; i++) {
       VideoTypeData videos = VideoTypeData(titles[i],"images/video_type_$i.jpg","res/$i.json");
       videoTypes.add(videos);
     }

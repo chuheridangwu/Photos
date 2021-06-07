@@ -3,6 +3,7 @@ import 'package:mglobalphoto/drawer/cacheManage.dart';
 import 'package:mglobalphoto/drawer/privaty_webview.dart';
 import 'package:mglobalphoto/drawer/shuffle_photo.dart';
 import 'package:mglobalphoto/drawer/shuffle_video.dart';
+import 'package:mglobalphoto/generated/l10n.dart';
 import 'package:mglobalphoto/main.dart';
 import 'package:package_info/package_info.dart';
 
@@ -74,29 +75,30 @@ class _PhotoDrawerState extends State<PhotoDrawer> {
 
   // 创建列表Widget
   Widget createRowListView() {
+    final navContext = navigatorKey.currentContext;
     return Expanded(
       child: ListView(
         children: [
           
-          createRowView(Icons.shuffle, "随机视频", () {
+          createRowView(Icons.shuffle, S.of(navContext).drawer_video, () {
               Navigator.pushNamed(context,ShuffleVideoPlay.routeName);
            }),
-          createRowView(Icons.image, "随机图片", () {
+          createRowView(Icons.image, S.of(navContext).drawer_photo, () {
               Navigator.pushNamed(context,ShufflePhoto.routeName);
            }),
-          createRowView(Icons.cached, "清除缓存", () {
+          createRowView(Icons.cached, S.of(navContext).drawer_cache, () {
               Future.delayed(Duration(seconds: 1)).then((value){
                 showDialog(context: context, builder: (ctx){
                   return createDialog();
                 });
               });
            }),
-           createRowView(Icons.policy, "隐私政策", () {
+           createRowView(Icons.policy, S.of(navContext).drawer_private, () {
              Navigator.pushNamed(context, PrivatyWebView.routeName);
            }),
            ListTile(
             leading: Icon(Icons.error),
-            title:  Text("版本号 $_version"),
+            title:  Text(S.of(context).drawer_version("$_version")),
           ),
         ],
       ),

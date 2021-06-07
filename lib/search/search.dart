@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:mglobalphoto/generated/l10n.dart';
 import 'package:mglobalphoto/search/search_result.dart';
 import 'package:mglobalphoto/search/serarch_serve.dart';
 import 'package:mglobalphoto/style/button.dart';
@@ -35,7 +36,7 @@ class _SearchViewState extends State<SearchView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("搜索"),
+        title: Text(S.of(context).search_title),
       ),
       body: Column(
         children: [
@@ -100,11 +101,11 @@ class _SearchViewState extends State<SearchView> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text("热门搜索",style: TextStyle(),),
+          Text(S.of(context).search_hot,style: TextStyle(),),
           TextButton(onPressed: (){
             _keyIndex += 1;
             refreshKeywords();
-          },  child: Text("换一批",style: TextStyle(color: Colors.black54),)),
+          },  child: Text(S.of(context).search_change,style: TextStyle(color: Colors.black54),)),
         ],
       ),
     );
