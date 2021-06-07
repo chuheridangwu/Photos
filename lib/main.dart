@@ -18,7 +18,7 @@ import 'package:mglobalphoto/home/photo_preview.dart';
 import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/search/search_result.dart';
 import 'package:mglobalphoto/serve/admob_manage.dart';
-import 'package:mglobalphoto/style/appconfig.dart';
+import 'package:mglobalphoto/style/app_config.dart';
 import 'package:mglobalphoto/video/video.dart';
 import 'package:mglobalphoto/video/video_list.dart';
 import 'package:mglobalphoto/video/video_play_list.dart';
@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     AdmobManage();
+    AppConfig();
 
     return MaterialApp(
       title: 'MGlobal Photo',

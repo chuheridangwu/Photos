@@ -11,28 +11,24 @@ class HomePageClassify extends StatefulWidget {
 }
 
 class _HomePageClassifyState extends State<HomePageClassify> {
-
   List<Anchor> _anchors = [];
 
   @override
   void initState() {
     super.initState();
-    HomeServe.isLoadMoreData().then((value){
-         HomeServe.getClassifyData(value["app"]).then((value){
+    HomeServe.getClassifyData().then((value) {
       setState(() {
         _anchors = value;
       });
     });
-    });
- 
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return createCardView();
   }
 
-    // 创建CardView
+  // 创建CardView
   Widget createCardView() {
     return GridView.builder(
         padding: EdgeInsets.all(5),
@@ -44,8 +40,9 @@ class _HomePageClassifyState extends State<HomePageClassify> {
         ),
         itemBuilder: (ctx, index) {
           final anchor = _anchors[index];
-          return HomeItem(anchor, (){
-            Navigator.pushNamed(context, HomeClassifyTabbar.routeName,arguments: anchor);
+          return HomeItem(anchor, () {
+            Navigator.pushNamed(context, HomeClassifyTabbar.routeName,
+                arguments: anchor);
           });
         });
   }

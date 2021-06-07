@@ -4,6 +4,7 @@ import 'package:mglobalphoto/drawer/shuffle_serve.dart';
 import 'package:mglobalphoto/home/home_server.dart';
 import 'package:mglobalphoto/serve/admob_manage.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
+import 'package:mglobalphoto/style/app_config.dart';
 import 'package:photo_view/photo_view.dart';
 
 class ShufflePhoto extends StatefulWidget {
@@ -27,23 +28,19 @@ class _ShufflePhotoState extends State<ShufflePhoto> {
 
   // 获取图片数据
   void getPhotoUrl() {
-    HomeServe.isLoadMoreData().then((value) {
-      int type = value["app"];
-      if (type == 1) {
-        _serve.getShufflePhoto().then((value) {
+    if (AppConfig().isClose) {
+      _serve.getShufflePhoto().then((value) {
           setState(() {
             _anchor = value;
           });
         });
-      } else {
-        _serve.getShuffleSeexPhoto().then((value) {
+    } else {
+      _serve.getShuffleSeexPhoto().then((value) {
           setState(() {
             _anchor = value;
           });
         });
-      }
-    });
-
+    }
     _count += 1;
     if (_count % 20 == 0) {
       AdmobManage().showRewardedAd();

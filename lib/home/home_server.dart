@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:mglobalphoto/serve/http_request.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
+import 'package:mglobalphoto/style/app_config.dart';
 
 class HomeServe {
   // 禁止加载更多
@@ -58,12 +59,9 @@ class HomeServe {
 
     return anchors;
   }
-
-  static Future<Map> isLoadMoreData() async {
-    return await HttpRequrst.request("https://pandaboy.top/config.json");
-  }
-   // 获取分类数据 如果index == 1 显示分类
-  static Future<List<Anchor>> getClassifyData(int index) async {
+  
+   // 获取分类数据 如果 AppConfig().isClose == true 显示分类
+  static Future<List<Anchor>> getClassifyData() async {
     Map<String, dynamic> data = await HttpRequrst.request(
         "http://service.aibizhi.adesk.com/v1/wallpaper/category");
     List<Anchor> anchors = [];
@@ -76,8 +74,8 @@ class HomeServe {
             strUid: item["id"],
             headerIcon: item["cover"],
           );
-          if ((anchor.strUid == "4e4d610cdf714d2966000000" && index == 1) || 
-              (anchor.strUid == "4e4d610cdf714d2966000007" && index == 1)) {
+          if ((anchor.strUid == "4e4d610cdf714d2966000000" && AppConfig().isClose) || 
+              (anchor.strUid == "4e4d610cdf714d2966000007" && AppConfig().isClose)) {
             continue;
           }
           anchors.add(anchor);

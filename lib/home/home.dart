@@ -7,7 +7,7 @@ import 'package:mglobalphoto/home/home_page/home_start_page.dart';
 import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/serve/data_manage.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
-import 'package:mglobalphoto/style/appconfig.dart';
+import 'package:mglobalphoto/style/app_config.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'home_page/home_classify_page.dart';
