@@ -137,9 +137,9 @@ class MyNavBarItem extends BottomNavigationBarItem {
 }
 
 List<BottomNavigationBarItem> navBarItems = [
-  MyNavBarItem("Home", Icons.home, Icons.home_outlined),
-  MyNavBarItem("Video", Icons.play_circle_fill, Icons.play_circle_outline),
-  MyNavBarItem("Banner", Icons.view_headline, Icons.view_headline),
+  MyNavBarItem("首页", Icons.home, Icons.home_outlined),
+  MyNavBarItem("视频", Icons.play_circle_fill, Icons.play_circle_outline),
+  MyNavBarItem("横幅", Icons.view_headline, Icons.view_headline),
 
 ];
 

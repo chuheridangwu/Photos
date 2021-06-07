@@ -35,16 +35,22 @@ class _VideoPlayListViewState extends State<VideoPlayListView> {
     _anchors = data["list"];
     _index = data["index"];
     _pageController = PageController(initialPage: _index);
-    return Material(
-      child: PageView.builder(
-          onPageChanged: onPageChangeVlaue,
-          controller: _pageController,
-          scrollDirection: Axis.vertical,
-          itemCount: _anchors.length,
-          itemBuilder: (ctx, index) {
-            final Anchor anchor = _anchors[index];
-            return VideoPlayerItem(anchor);
-          }),
+    return  Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.close),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        body: PageView.builder(
+            onPageChanged: onPageChangeVlaue,
+            controller: _pageController,
+            scrollDirection: Axis.vertical,
+            itemCount: _anchors.length,
+            itemBuilder: (ctx, index) {
+              final Anchor anchor = _anchors[index];
+              return VideoPlayerItem(anchor);
+            }),
     );
   }
 }
