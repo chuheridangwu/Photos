@@ -30,19 +30,21 @@ class SearchServe {
   List<SearchTypeData> types = [];
   SearchServe.initData() {
     final context = navigatorKey.currentContext;
-    List titles = [S.of(context).search_heng, 
-    S.of(context).search_shu, 
-    S.of(context).search_bizhi, 
-    S.of(context).search_icon, 
-    S.of(context).search_sougou, 
-    S.of(context).search_360];
+    List titles = [
+      S.of(context).search_sougou,
+      S.of(context).search_360,
+      S.of(context).search_heng,
+      S.of(context).search_shu,
+      S.of(context).search_bizhi,
+      S.of(context).search_icon,
+    ];
     List enums = [
+      SearchEnum.SOUGOU,
+      SearchEnum.QIHOO,
       SearchEnum.HENGPING,
       SearchEnum.SHUPING,
       SearchEnum.BIZHI,
-      SearchEnum.TOUXIANG,
-      SearchEnum.SOUGOU,
-      SearchEnum.QIHOO
+      SearchEnum.TOUXIANG
     ];
     for (var i = 0; i < titles.length; i++) {
       SearchTypeData typeData = SearchTypeData(titles[i], 0, enums[i], []);

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lpinyin/lpinyin.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 
 class HomeItem extends StatelessWidget {
@@ -27,6 +28,8 @@ class HomeItem extends StatelessWidget {
 
   // 底部昵称和观看人数
   Widget bottomWidget() {
+    final name =  PinyinHelper.getPinyinE(anchor.userName, separator: " ", defPinyin: anchor.userName, format: PinyinFormat.WITHOUT_TONE);//tian fu guang chang
+
     return Container(
       alignment: Alignment.bottomCenter,
       padding: EdgeInsets.fromLTRB(5, 0, 0, 5),
@@ -34,7 +37,7 @@ class HomeItem extends StatelessWidget {
         children: [
           Expanded(
               child: Text(
-            anchor.userName,
+            name,
             style: TextStyle(
                 color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
             overflow: TextOverflow.ellipsis,

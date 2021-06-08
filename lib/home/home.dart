@@ -7,6 +7,7 @@ import 'package:mglobalphoto/home/home_page/home_avatar_page.dart';
 import 'package:mglobalphoto/home/home_page/home_start_page.dart';
 import 'package:mglobalphoto/main.dart';
 import 'package:mglobalphoto/search/search.dart';
+import 'package:mglobalphoto/style/app_config.dart';
 
 import 'home_page/home_classify_page.dart';
 import 'home_page/home_album_page.dart';
@@ -34,6 +35,9 @@ class _HomeLiveViewState extends State<HomeLiveView>
   @override
   void initState() {
     super.initState();
+    if (AppConfig().isClose) {
+      tabs.remove(S.of(navigatorKey.currentContext).home_tab_3);
+    }
     // 创建Controller
     _tabController = TabController(length: tabs.length, vsync: this);
   }
