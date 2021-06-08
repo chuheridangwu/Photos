@@ -32,11 +32,11 @@ class ShuffleServe {
     _anchors = [];
     int index = Random().nextInt(30);
     String src = await HttpRequrst.request(
-        "https://image.so.com/j?src=srp&q=%E6%B0%94%E8%B4%A8%E7%BE%8E%E5%A5%B3&pn=30&sn=$index");
+        "http://ziti2.com/bizhi/content/public_time_line.php?channel=3&count=30&device=2&start=$index&version=1");
     Map map = jsonDecode(src);
-    List items = map["list"];
+    List items = map["feeds"];
     for (var item in items) {
-      final Anchor anchor = Anchor(headerIcon: item["thumb"]);
+      final Anchor anchor = Anchor(headerIcon: item["image_large"]);
       _anchors.add(anchor);
     }
     _anchors.shuffle();
