@@ -54,9 +54,6 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'MGlobal Photo',
-      localeListResolutionCallback: (_,local){
-        return Locale("en");
-      },
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate, // 指定本地化的字符串和一些其他的值
         GlobalCupertinoLocalizations.delegate, // 对应的Cupertino风格
@@ -130,7 +127,7 @@ class _MainPageViewState extends State<MainPageView> {
   // APPBar
   Widget createAppbar() {
     return AppBar(
-      title: Text(S.of(context).home),
+      title: Text('MGlobal Photo'),
       elevation: 0, //隐藏底部阴影分割线
       leading: Builder(builder: (ctx) {
         return IconButton(
