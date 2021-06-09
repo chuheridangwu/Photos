@@ -34,18 +34,18 @@ class AdmobManage {
 
   // 插页式广告 正式id
   static final String InterstitialAdId = Platform.isAndroid
-      ? 'ca-app-pub-8177181808824082~1835992869'
-      : 'ca-app-pub-8177181808824082/3045132756';
+      ? 'ca-app-pub-8177181808824082/3045132756'
+      : 'ca-app-pub-8177181808824082/7219201548';
 
   // 激励视频 正式id
   static final String RewardedAdId = Platform.isAndroid
-      ? 'ca-app-pub-8177181808824082~1835992869'
-      : 'ca-app-pub-8177181808824082/9310910780';
+      ? 'ca-app-pub-8177181808824082/9310910780'
+      : 'ca-app-pub-8177181808824082/5714548184';
 
   // 横幅广告 正式id
   static final String BannerAdId = Platform.isAndroid
-      ? 'ca-app-pub-8177181808824082~1835992869'
-      : 'ca-app-pub-8177181808824082/9766453778';
+      ? 'ca-app-pub-8177181808824082/9766453778'
+      : 'ca-app-pub-8177181808824082/6080599442';
 
   // 创建插页广告
   void _createInterstitialAd() {
