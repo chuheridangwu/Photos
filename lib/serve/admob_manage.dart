@@ -50,7 +50,7 @@ class AdmobManage {
   // 创建插页广告
   void _createInterstitialAd() {
     InterstitialAd.load(
-        adUnitId: InterstitialAd.testAdUnitId,
+        adUnitId: InterstitialAdId,
         request: AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
@@ -96,7 +96,7 @@ class AdmobManage {
   // 创建视频激励广告
   void _createRewardedAd() {
     RewardedAd.load(
-        adUnitId: RewardedAd.testAdUnitId,
+        adUnitId: RewardedAdId,
         request: AdRequest(),
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (RewardedAd ad) {
@@ -158,7 +158,7 @@ class AdmobManage {
     final BannerAd banner = BannerAd(
       size: size,
       request: AdRequest(),
-      adUnitId: BannerAd.testAdUnitId,
+      adUnitId: BannerAdId,
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
           // 加载完成
