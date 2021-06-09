@@ -142,6 +142,11 @@ class _MainPageViewState extends State<MainPageView> {
             icon: Icon(Icons.share),
             onPressed: () {
               Share.share('check out my website https://example.com');
+              if (Platform.isAndroid) {
+                
+              } else {
+                Share.share("分享当前应用 http://itunes.apple.com/cn/app/id1571237171?mt=8");
+              }
             })
       ],
     );
