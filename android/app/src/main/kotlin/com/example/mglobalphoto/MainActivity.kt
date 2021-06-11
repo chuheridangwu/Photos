@@ -1,4 +1,4 @@
-package com.example.mglobalphoto
+package com.mglobal.mglobal
 
 import io.flutter.embedding.android.FlutterActivity
 

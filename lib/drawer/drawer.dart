@@ -79,10 +79,6 @@ class _PhotoDrawerState extends State<PhotoDrawer> {
     return Expanded(
       child: ListView(
         children: [
-          
-          createRowView(Icons.shuffle, S.of(navContext).drawer_video, () {
-              Navigator.pushNamed(context,ShuffleVideoPlay.routeName);
-           }),
           createRowView(Icons.image, S.of(navContext).drawer_photo, () {
               Navigator.pushNamed(context,ShufflePhoto.routeName);
            }),

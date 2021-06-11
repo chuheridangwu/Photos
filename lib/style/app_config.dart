@@ -23,12 +23,6 @@ class AppConfig{
 
   // 初始化数据
   void initData() async {
-     AppConfig.isLoadMoreData().then((value) {
-        isClose = value["isClose"] == 1 ? true : false;
-     });
-  }
-
-  static Future<Map> isLoadMoreData() async {
-    return await HttpRequrst.request("https://pandaboy.top/config.json");
+ 
   }
 }

@@ -138,7 +138,7 @@ class _SearchViewState extends State<SearchView> {
         return GestureDetector(
           child: Container(
             decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
+                color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(5))),
             padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
             margin: EdgeInsets.all(5),

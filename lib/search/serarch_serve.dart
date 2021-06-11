@@ -23,6 +23,7 @@ class SearchServe {
     if (data["code"] == 0) {
       Map<String, dynamic> items = data["res"]["keyword"][0];
       keys = items["items"].cast<String>();
+      keys.remove("美女");
     }
     return keys;
   }

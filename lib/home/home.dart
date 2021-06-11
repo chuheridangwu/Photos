@@ -35,9 +35,9 @@ class _HomeLiveViewState extends State<HomeLiveView>
   @override
   void initState() {
     super.initState();
-    if (AppConfig().isClose) {
-      tabs.remove(S.of(navigatorKey.currentContext).home_tab_3);
-    }
+    // if (AppConfig().isClose) {
+    //   tabs.remove(S.of(navigatorKey.currentContext).home_tab_3);
+    // }
     // 创建Controller
     _tabController = TabController(length: tabs.length, vsync: this);
   }
@@ -79,7 +79,7 @@ class _HomeLiveViewState extends State<HomeLiveView>
         elevation: 0, //隐藏底部阴影分割线
         bottom: TabBar(
           // labelColor: Colors.red,
-          indicatorColor: Theme.of(context).primaryColor,
+          indicatorColor: Colors.black,
           unselectedLabelColor: Colors.grey,
           isScrollable: true,
           controller: _tabController,

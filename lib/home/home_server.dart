@@ -74,8 +74,9 @@ class HomeServe {
             strUid: item["id"],
             headerIcon: item["cover"],
           );
-          if ((anchor.strUid == "4e4d610cdf714d2966000000" && AppConfig().isClose) || 
-              (anchor.strUid == "4e4d610cdf714d2966000007" && AppConfig().isClose)) {
+          if (anchor.strUid == "4e4d610cdf714d2966000000" ||
+              anchor.strUid == "4e4d610cdf714d2966000003"|| 
+              anchor.strUid == "4e4d610cdf714d2966000007" ) {
             continue;
           }
           anchors.add(anchor);

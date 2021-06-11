@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:lpinyin/lpinyin.dart';
 import 'package:mglobalphoto/banner/banner.dart';
 import 'package:mglobalphoto/banner/banner_list.dart';
 import 'package:mglobalphoto/demo.dart';
@@ -20,6 +21,7 @@ import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/search/search_result.dart';
 import 'package:mglobalphoto/serve/admob_manage.dart';
 import 'package:mglobalphoto/style/app_config.dart';
+import 'package:mglobalphoto/style/style.dart';
 import 'package:mglobalphoto/video/video.dart';
 import 'package:mglobalphoto/video/video_list.dart';
 import 'package:mglobalphoto/video/video_play_list.dart';
@@ -45,13 +47,26 @@ void main() {
 }
 
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
-
+const MaterialColor primaryBlack = MaterialColor(
+  _blackPrimaryValue,
+  <int, Color>{
+    50: Color(0xFF000000),
+    100: Color(0xFF000000),
+    200: Color(0xFF000000),
+    300: Color(0xFF000000),
+    400: Color(0xFF000000),
+    500: Color(_blackPrimaryValue),
+    600: Color(0xFF000000),
+    700: Color(0xFF000000),
+    800: Color(0xFF000000),
+    900: Color(0xFF000000),
+  },
+);
+const int _blackPrimaryValue = 0xFFFFCDD2;
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    AdmobManage();
-    AppConfig();
-
+    // AdmobManage();
     return MaterialApp(
       title: 'MGlobal Photo',
       localizationsDelegates: [
@@ -64,7 +79,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       theme: ThemeData(
-        primarySwatch: Colors.yellow,
+        primarySwatch: primaryBlack
       ),
       home: MainPageView(),
       routes: {

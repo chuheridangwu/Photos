@@ -28,22 +28,14 @@ class _ShufflePhotoState extends State<ShufflePhoto> {
 
   // 获取图片数据
   void getPhotoUrl() {
-    if (AppConfig().isClose) {
-      _serve.getShufflePhoto().then((value) {
+     _serve.getShufflePhoto().then((value) {
           setState(() {
             _anchor = value;
           });
         });
-    } else {
-      _serve.getShuffleSeexPhoto().then((value) {
-          setState(() {
-            _anchor = value;
-          });
-        });
-    }
     _count += 1;
     if (_count % 20 == 0) {
-      AdmobManage().showRewardedAd();
+      AdmobManage().showInterstitialAd();
     }
   }
 
