@@ -31,7 +31,6 @@ import 'home/home_page/home_all_item.dart';
 void main() {
   // 进制横屏
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(new MyApp());
@@ -49,7 +48,6 @@ final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    AdmobManage();
     AppConfig();
 
     return MaterialApp(
@@ -97,8 +95,6 @@ class _MainPageViewState extends State<MainPageView> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Future.delayed(Duration(seconds: 5))
-        .then((value) => AdmobManage().showInterstitialAd());
   }
 
   @override
@@ -144,9 +140,7 @@ class _MainPageViewState extends State<MainPageView> {
               Share.share('check out my website https://example.com');
               if (Platform.isAndroid) {
                 
-              } else {
-                Share.share("分享当前应用 http://itunes.apple.com/cn/app/id1571237171?mt=8");
-              }
+              } 
             })
       ],
     );

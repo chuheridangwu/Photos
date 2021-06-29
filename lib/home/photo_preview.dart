@@ -32,9 +32,6 @@ class _PhotoPreViewState extends State<PhotoPreView> {
     _pageController = PageController(initialPage: _index);
     _pageController.addListener(() {
       print(_pageController.page);
-      if (_pageController.page % 20 == 0) {
-        AdmobManage().showRewardedAd();
-      }
     });
     setState(() {});
   }

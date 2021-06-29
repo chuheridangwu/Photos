@@ -19,7 +19,6 @@ class _VideoListViewState extends State<VideoListView> {
   final VideoServe _serve = VideoServe();
   VideoTypeData _typeData;
   List<Anchor> _anchors = [];
-  BannerAd _anchoredBanner;
 
   @override
   void initState() {
@@ -30,12 +29,6 @@ class _VideoListViewState extends State<VideoListView> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _typeData = ModalRoute.of(context).settings.arguments as VideoTypeData;
-
-    AdmobManage().createAnchoredBanner(context, (ad) {
-      setState(() {
-        _anchoredBanner = ad;
-      });
-    });
     refreshData();
   }
 
@@ -58,14 +51,6 @@ class _VideoListViewState extends State<VideoListView> {
         ),
       ),
       body: Column(children: [
-        _anchoredBanner != null
-            ? Container(
-                height: AdSize.banner.height.toDouble(),
-                width: AdSize.banner.width.toDouble(),
-                color: Colors.white,
-                child: AdWidget(ad: _anchoredBanner),
-              )
-            : Container(),
         Expanded(child: createGridView())
       ]),
     );

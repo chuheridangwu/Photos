@@ -19,17 +19,11 @@ class _BannerListViewState extends State<BannerListView> {
   final BannerServe _serve = BannerServe.initData();
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
-  BannerAd _anchoredBanner;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _bannerType = ModalRoute.of(context).settings.arguments as BannerType;
-    AdmobManage().createAnchoredBanner(context, (ad) {
-      setState(() {
-        _anchoredBanner = ad; 
-      });
-    });
     refreshData();
   }
 
@@ -73,14 +67,6 @@ class _BannerListViewState extends State<BannerListView> {
       ),
       body: Column(
         children: [
-          _anchoredBanner != null
-              ? Container(
-                  height: AdSize.banner.height.toDouble(),
-                  width: AdSize.banner.width.toDouble(),
-                  color: Colors.white,
-                  child: AdWidget(ad: _anchoredBanner),
-                )
-              : Container(),
           Expanded(
             child: SmartRefresher(
                 enablePullUp: true,

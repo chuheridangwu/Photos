@@ -42,9 +42,6 @@ class _ShufflePhotoState extends State<ShufflePhoto> {
         });
     }
     _count += 1;
-    if (_count % 20 == 0) {
-      AdmobManage().showRewardedAd();
-    }
   }
 
   @override

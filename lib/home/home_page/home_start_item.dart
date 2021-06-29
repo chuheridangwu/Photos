@@ -21,17 +21,11 @@ class _HomePageStartListState extends State<HomePageStartList> {
   // 监听滑动
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
-  BannerAd _anchoredBanner;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _anchor = ModalRoute.of(context).settings.arguments as Anchor;
-    AdmobManage().createAnchoredBanner(context, (ad) {
-      setState(() {
-        _anchoredBanner = ad;
-      });
-    });
     requestData();
   }
 
@@ -67,14 +61,6 @@ class _HomePageStartListState extends State<HomePageStartList> {
       ),
       body: Column(
         children: [
-          _anchoredBanner != null
-              ? Container(
-                  height: AdSize.banner.height.toDouble(),
-                  width: AdSize.banner.width.toDouble(),
-                  color: Colors.white,
-                  child: AdWidget(ad: _anchoredBanner),
-                )
-              : Container(),
           Expanded(child: createSmartView())
         ],
       ),

@@ -20,8 +20,6 @@ class _HomePageAlbumItemState extends State<HomePageAlbumItem> {
   Anchor _anchor;
   int _index = 0;
   final HomeServe _serve = HomeServe();
-  BannerAd _anchoredBanner;
-
   // 监听滑动
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
@@ -30,11 +28,6 @@ class _HomePageAlbumItemState extends State<HomePageAlbumItem> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _anchor = ModalRoute.of(context).settings.arguments as Anchor;
-    AdmobManage().createAnchoredBanner(context, (ad) {
-      setState(() {
-        _anchoredBanner = ad;
-      });
-    });
     refreshData();
   }
 
@@ -76,13 +69,6 @@ class _HomePageAlbumItemState extends State<HomePageAlbumItem> {
       ),
       body: Column(
         children: [
-          _anchoredBanner != null
-              ? Container(
-                  height: AdSize.banner.height.toDouble(),
-                  width: AdSize.banner.width.toDouble(),
-                  child: AdWidget(ad: _anchoredBanner),
-                )
-              : Container(),
           Expanded(child: createSmartView())
         ],
       ),
