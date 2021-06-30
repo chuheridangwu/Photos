@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "home_tab_3" : MessageLookupByLibrary.simpleMessage("Topic"),
     "home_tab_4" : MessageLookupByLibrary.simpleMessage("Portrait"),
     "home_tab_5" : MessageLookupByLibrary.simpleMessage("Daquan"),
+    "home_tab_6" : MessageLookupByLibrary.simpleMessage("Party"),
     "search_360" : MessageLookupByLibrary.simpleMessage("Qihoo"),
     "search_bizhi" : MessageLookupByLibrary.simpleMessage("Wallpaper"),
     "search_change" : MessageLookupByLibrary.simpleMessage("Change a batch"),

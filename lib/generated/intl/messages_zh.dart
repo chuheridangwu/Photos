@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "home_tab_3" : MessageLookupByLibrary.simpleMessage("专题"),
     "home_tab_4" : MessageLookupByLibrary.simpleMessage("头像"),
     "home_tab_5" : MessageLookupByLibrary.simpleMessage("大全"),
+    "home_tab_6" : MessageLookupByLibrary.simpleMessage("派对"),
     "search_360" : MessageLookupByLibrary.simpleMessage("360"),
     "search_bizhi" : MessageLookupByLibrary.simpleMessage("壁纸"),
     "search_change" : MessageLookupByLibrary.simpleMessage("换一批"),

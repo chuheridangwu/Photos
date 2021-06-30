@@ -144,6 +144,22 @@ class HomeServe {
     }
     return anchors;
   }
+
+  // 获取性感主播头像
+  Future<List<Anchor>> getShuffleSeexPhoto(int index) async {
+    String src = await HttpRequrst.request(
+        "http://ziti2.com/bizhi/content/public_time_line.php?channel=2&count=30&device=2&start=$index&version=1");
+    Map map = jsonDecode(src);
+    List<Anchor> anchors = [];
+    if (map["succ"] == 1) {
+      List items = map["feeds"];
+      for (var item in items) {
+        final Anchor anchor = Anchor(headerIcon: item["image_large"],thumb:item["image_thumb"] );
+        anchors.add(anchor);
+      }
+    }
+    return anchors;
+  }
 }
 
 /*

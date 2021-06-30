@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:mglobalphoto/generated/l10n.dart';
 import 'package:mglobalphoto/home/home_page/home_all_page.dart';
 import 'package:mglobalphoto/home/home_page/home_avatar_page.dart';
+import 'package:mglobalphoto/home/home_page/home_sex_page.dart';
 import 'package:mglobalphoto/home/home_page/home_start_page.dart';
 import 'package:mglobalphoto/main.dart';
 import 'package:mglobalphoto/search/search.dart';
@@ -18,14 +19,15 @@ class HomeLiveView extends StatefulWidget {
 }
 
 class _HomeLiveViewState extends State<HomeLiveView>
-    with SingleTickerProviderStateMixin {
-  // 切换大小图
-  int _rowCount = 2;
+    with TickerProviderStateMixin {
+
   //需要定义一个Controller
   TabController _tabController;
+
   final navContext = navigatorKey.currentContext;
   List tabs = [
     S.of(navigatorKey.currentContext).home_tab_1,
+    S.of(navigatorKey.currentContext).home_tab_6,
     S.of(navigatorKey.currentContext).home_tab_2,
     S.of(navigatorKey.currentContext).home_tab_3,
     S.of(navigatorKey.currentContext).home_tab_4,
@@ -35,16 +37,32 @@ class _HomeLiveViewState extends State<HomeLiveView>
   @override
   void initState() {
     super.initState();
-    if (AppConfig().isClose) {
-      tabs.remove(S.of(navigatorKey.currentContext).home_tab_3);
-    }
+
     // 创建Controller
     _tabController = TabController(length: tabs.length, vsync: this);
+
+    _initData();
+
+  }
+
+  void _initData(){
+
+    AppConfig().initData().then((value){
+      if (AppConfig().isClose) {
+        setState(() {
+          tabs.remove(S.of(navigatorKey.currentContext).home_tab_6);
+          tabs.remove(S.of(navigatorKey.currentContext).home_tab_3);
+
+          _tabController = TabController(length: tabs.length, vsync: this);
+          _tabController.animateTo(0);
+        });
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return  DefaultTabController(
       length: tabs.length,
       child: Scaffold(
         appBar: createAppBar(),
@@ -63,8 +81,12 @@ class _HomeLiveViewState extends State<HomeLiveView>
               if (e == S.of(navigatorKey.currentContext).home_tab_5) {
                 return HomePageAll();
               }
+              if (e == S.of(navigatorKey.currentContext).home_tab_6) {
+                return HomeSexPage();
+              }
               return HomePageView();
-            }).toList()),
+            }).toList()
+          ),
         floatingActionButton: floatingBtn(),
       ),
     );

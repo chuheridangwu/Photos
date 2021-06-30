@@ -22,9 +22,11 @@ class AppConfig{
   bool isClose = true;
 
   // 初始化数据
-  void initData() async {
-     AppConfig.isLoadMoreData().then((value) {
+  Future initData() async {
+      AppConfig.isLoadMoreData().then((value) {
         isClose = value["isClose"] == 1 ? true : false;
+     }).then((value){
+       return Future((){});
      });
   }
 

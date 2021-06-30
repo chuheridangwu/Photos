@@ -604,6 +604,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Party`
+  String get home_tab_6 {
+    return Intl.message(
+      'Party',
+      name: 'home_tab_6',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

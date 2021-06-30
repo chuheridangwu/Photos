@@ -5,7 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mglobalphoto/banner/banner.dart';
 import 'package:mglobalphoto/banner/banner_list.dart';
-import 'package:mglobalphoto/demo.dart';
 import 'package:mglobalphoto/drawer/drawer.dart';
 import 'package:mglobalphoto/drawer/shuffle_photo.dart';
 import 'package:mglobalphoto/drawer/shuffle_serve.dart';
@@ -24,7 +23,6 @@ import 'package:mglobalphoto/video/video.dart';
 import 'package:mglobalphoto/video/video_list.dart';
 import 'package:mglobalphoto/video/video_play_list.dart';
 import 'package:share/share.dart';
-
 import 'generated/l10n.dart';
 import 'home/home_page/home_all_item.dart';
 
@@ -137,10 +135,7 @@ class _MainPageViewState extends State<MainPageView> {
         IconButton(
             icon: Icon(Icons.share),
             onPressed: () {
-              Share.share('check out my website https://example.com');
-              if (Platform.isAndroid) {
-                
-              } 
+              Share.share('如果喜欢可以给分享给更多的朋友看到哦 https://appgallery.huawei.com/#/app/C104408727');
             })
       ],
     );
