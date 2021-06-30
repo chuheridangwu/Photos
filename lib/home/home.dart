@@ -27,9 +27,7 @@ class _HomeLiveViewState extends State<HomeLiveView>
   final navContext = navigatorKey.currentContext;
   List tabs = [
     S.of(navigatorKey.currentContext).home_tab_1,
-    S.of(navigatorKey.currentContext).home_tab_6,
     S.of(navigatorKey.currentContext).home_tab_2,
-    S.of(navigatorKey.currentContext).home_tab_3,
     S.of(navigatorKey.currentContext).home_tab_4,
     S.of(navigatorKey.currentContext).home_tab_5,
    ];
@@ -45,13 +43,13 @@ class _HomeLiveViewState extends State<HomeLiveView>
 
   }
 
-  void _initData(){
-
-    AppConfig().initData().then((value){
-      if (AppConfig().isClose) {
+  void _initData() {
+    
+    Future.delayed(Duration(seconds: 6)).then((value){
+      if (AppConfig().isClose == false) {
         setState(() {
-          tabs.remove(S.of(navigatorKey.currentContext).home_tab_6);
-          tabs.remove(S.of(navigatorKey.currentContext).home_tab_3);
+          tabs.insert(1,S.of(navigatorKey.currentContext).home_tab_6);
+          tabs.add(S.of(navigatorKey.currentContext).home_tab_3);
 
           _tabController = TabController(length: tabs.length, vsync: this);
           _tabController.animateTo(0);

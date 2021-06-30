@@ -1,8 +1,8 @@
 import 'package:mglobalphoto/serve/http_request.dart';
+import 'package:package_info/package_info.dart';
 
-class AppConfig{
-
-    // 单利公开访问
+class AppConfig {
+  // 单利公开访问
   factory AppConfig() => _shareInstance();
   // 静态私有成员
   static AppConfig _appConfig = AppConfig._();
@@ -22,12 +22,17 @@ class AppConfig{
   bool isClose = true;
 
   // 初始化数据
-  Future initData() async {
-      AppConfig.isLoadMoreData().then((value) {
-        isClose = value["isClose"] == 1 ? true : false;
-     }).then((value){
-       return Future((){});
-     });
+  void initData() {
+    AppConfig.isLoadMoreData().then((data) {
+      return data["version"];
+    }).then((version) {
+      // 本地的版本号 大于 线上的版本号，则属于审核模式
+      PackageInfo.fromPlatform().then((value) {
+        int appVersion = int.parse(value.version.replaceAll(".", ""));
+        isClose = appVersion > version;
+        return isClose;
+      });
+    });
   }
 
   static Future<Map> isLoadMoreData() async {
