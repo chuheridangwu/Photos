@@ -20,7 +20,6 @@ class HomeLiveView extends StatefulWidget {
 
 class _HomeLiveViewState extends State<HomeLiveView>
     with TickerProviderStateMixin {
-
   //需要定义一个Controller
   TabController _tabController;
 
@@ -30,7 +29,7 @@ class _HomeLiveViewState extends State<HomeLiveView>
     S.of(navigatorKey.currentContext).home_tab_2,
     S.of(navigatorKey.currentContext).home_tab_4,
     S.of(navigatorKey.currentContext).home_tab_5,
-   ];
+  ];
 
   @override
   void initState() {
@@ -40,15 +39,13 @@ class _HomeLiveViewState extends State<HomeLiveView>
     _tabController = TabController(length: tabs.length, vsync: this);
 
     _initData();
-
   }
 
   void _initData() {
-    
-    Future.delayed(Duration(seconds: 6)).then((value){
+    Future.delayed(Duration(seconds: 3)).then((value) {
       if (AppConfig().isClose == false) {
         setState(() {
-          tabs.insert(1,S.of(navigatorKey.currentContext).home_tab_6);
+          tabs.insert(1, S.of(navigatorKey.currentContext).home_tab_6);
           tabs.add(S.of(navigatorKey.currentContext).home_tab_3);
 
           _tabController = TabController(length: tabs.length, vsync: this);
@@ -60,7 +57,7 @@ class _HomeLiveViewState extends State<HomeLiveView>
 
   @override
   Widget build(BuildContext context) {
-    return  DefaultTabController(
+    return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
         appBar: createAppBar(),
@@ -83,8 +80,7 @@ class _HomeLiveViewState extends State<HomeLiveView>
                 return HomeSexPage();
               }
               return HomePageView();
-            }).toList()
-          ),
+            }).toList()),
         floatingActionButton: floatingBtn(),
       ),
     );
