@@ -1,8 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mglobalphoto">
+   
+   <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+   
    <application
-        android:label="mglobalphoto"
+        android:label="MGlobal Photo"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
+        <!-- 正式应用id ca-app-pub-8177181808824082~1835992869 -->
+        <!-- 测试应用id ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -1,31 +1,43 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mglobalphoto/home/home_page_1.dart';
+import 'package:mglobalphoto/generated/l10n.dart';
+import 'package:mglobalphoto/home/home_page/home_all_page.dart';
+import 'package:mglobalphoto/home/home_page/home_avatar_page.dart';
+import 'package:mglobalphoto/home/home_page/home_start_page.dart';
+import 'package:mglobalphoto/main.dart';
 import 'package:mglobalphoto/search/search.dart';
-import 'package:mglobalphoto/serve/data_manage.dart';
-import 'package:mglobalphoto/serve/source_model.dart';
-import 'package:mglobalphoto/style/appconfig.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:mglobalphoto/style/app_config.dart';
 
-import 'home_item.dart';
+import 'home_page/home_classify_page.dart';
+import 'home_page/home_album_page.dart';
 
 class HomeLiveView extends StatefulWidget {
   @override
   _HomeLiveViewState createState() => _HomeLiveViewState();
 }
 
-class _HomeLiveViewState extends State<HomeLiveView> with SingleTickerProviderStateMixin {
-
+class _HomeLiveViewState extends State<HomeLiveView>
+    with SingleTickerProviderStateMixin {
   // 切换大小图
   int _rowCount = 2;
   //需要定义一个Controller
   TabController _tabController;
-  List tabs = ["精选", "分类", "专题", "头像", "大全"];
+  final navContext = navigatorKey.currentContext;
+  List tabs = [
+    S.of(navigatorKey.currentContext).home_tab_1,
+    S.of(navigatorKey.currentContext).home_tab_2,
+    S.of(navigatorKey.currentContext).home_tab_3,
+    S.of(navigatorKey.currentContext).home_tab_4,
+    S.of(navigatorKey.currentContext).home_tab_5,
+   ];
 
   @override
   void initState() {
     super.initState();
+    if (AppConfig().isClose) {
+      tabs.remove(S.of(navigatorKey.currentContext).home_tab_3);
+    }
     // 创建Controller
     _tabController = TabController(length: tabs.length, vsync: this);
   }
@@ -39,6 +51,18 @@ class _HomeLiveViewState extends State<HomeLiveView> with SingleTickerProviderSt
         body: TabBarView(
             controller: _tabController,
             children: tabs.map((e) {
+              if (e == S.of(navigatorKey.currentContext).home_tab_2) {
+                return HomePageClassify();
+              }
+              if (e == S.of(navigatorKey.currentContext).home_tab_3) {
+                return HomePageAlbum();
+              }
+              if (e == S.of(navigatorKey.currentContext).home_tab_4) {
+                return HomePageAvatar();
+              }
+              if (e == S.of(navigatorKey.currentContext).home_tab_5) {
+                return HomePageAll();
+              }
               return HomePageView();
             }).toList()),
         floatingActionButton: floatingBtn(),
@@ -49,18 +73,19 @@ class _HomeLiveViewState extends State<HomeLiveView> with SingleTickerProviderSt
   // AppBar 设置顶部AppBar
   Widget createAppBar() {
     return PreferredSize(
-      preferredSize: Size.fromHeight(35),
+      preferredSize: Size.fromHeight(44),
       child: AppBar(
         backgroundColor: Colors.white,
         elevation: 0, //隐藏底部阴影分割线
         bottom: TabBar(
           // labelColor: Colors.red,
           indicatorColor: Theme.of(context).primaryColor,
-          // unselectedLabelColor: Colors.blue,
+          unselectedLabelColor: Colors.grey,
           isScrollable: true,
           controller: _tabController,
-          tabs: tabs.map((e){
-            return Text(e);
+          tabs: tabs.map((e) {
+            return Container(
+                margin: EdgeInsets.only(bottom: 8), child: Text(e));
           }).toList(),
         ),
       ),

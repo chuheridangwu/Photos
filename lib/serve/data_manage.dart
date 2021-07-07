@@ -9,11 +9,15 @@ class DataManage {
   // 静态私有成员
   static DataManage _dataManage = DataManage._();
 
-  // 数据
+  // 首页精选数据
   Future<List<Anchor>> jingxuans;
+
+  // 首页专辑数据
+  Future<List<Anchor>> albums;
 
   DataManage._() {
     jingxuans = initJingXuanData();
+    albums = initAlbumData();
   }
 
   // 精选数据
@@ -27,6 +31,20 @@ class DataManage {
       String name = item["title"];
       String url = item["url"] + "@360,413.jpg";
       Anchor anchor = Anchor(uid: uid,userName: name,headerIcon: url);
+      anchors.add(anchor);
+    }
+    return  anchors;
+  }
+
+  // 首页专辑数据
+  Future<List<Anchor>> initAlbumData() async {
+    String jsonString = await rootBundle.loadString("res/zhuanji.json");
+    List<dynamic> items = json.decode(jsonString);
+    List<Anchor> anchors = [];
+    for (var item in items) {
+      String name = item["title"];
+      String url = item["img"];
+      Anchor anchor = Anchor(strUid: item["uid"],userName: name,headerIcon: url,desc: item["desc"]);
       anchors.add(anchor);
     }
     return  anchors;

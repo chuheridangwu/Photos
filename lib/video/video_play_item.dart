@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
 import 'package:mglobalphoto/main.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 import 'package:mglobalphoto/style/button.dart';
-import 'package:video_player/video_player.dart';
 
 class VideoPlayerItem extends StatefulWidget {
   final Anchor anchor;
@@ -14,41 +14,36 @@ class VideoPlayerItem extends StatefulWidget {
 }
 
 class _VideoPlayerItemState extends State<VideoPlayerItem> {
-  VideoPlayerController _videoController;
-  bool _isLiveEnd = false;
+  final FijkPlayer _player = FijkPlayer();
+  bool _isLiveEnd = true;
 
   @override
   void initState() {
     super.initState();
-    _videoController = VideoPlayerController.network(widget.anchor.liveAddres)
-      ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        print("播放器初始化完成");
+    _player.addListener(_fijkValueListener);
+    _player.setLoop(0);
+    _player.setDataSource(widget.anchor.liveAddres,autoPlay: true);
+  }
 
-        setState(() {});
-      }).onError((error, stackTrace) {
-        print("播放器播放视频失败 - ${error.toString()}");
-        setState(() {
-          _isLiveEnd = true;
-        });
-      });
-    _videoController.addListener(() {
-      if (_videoController.value.isPlaying) {
-        print("播放视频 - ${widget.anchor.liveAddres}");
-      } else if (_videoController.value.hasError) {
-        setState(() {
-          _isLiveEnd = true;
-        });
-      }
-    });
-    _videoController.play();
+  void _fijkValueListener() {
+    if (_player.value.state == FijkState.initialized) {
+      print("开始播放 -- ${widget.anchor.liveAddres}");
+      _isLiveEnd = false;
+      setState(() {});
+    }
+    if (_player.value.state == FijkState.error) {
+      print("播放视频失败");
+      _isLiveEnd = true;
+      setState(() {});
+    }
   }
 
   @override
   void dispose() {
     super.dispose();
     print("视频播放器销毁 - ${widget.anchor.liveAddres}");
-    _videoController.dispose();
+    _player.removeListener(_fijkValueListener);
+    _player.release();
   }
 
   @override
@@ -56,20 +51,16 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
     final size = MediaQuery.of(context).size;
 
     return FutureBuilder(builder: (ctx, asyncs) {
-      return Container(
-        width: size.width,
-        height: size.height,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Positioned(
-              bottom: 10,
-              right: 10,
-              child: IconButton(icon: Icon(Icons.close,),onPressed: (){
-              Navigator.of(context).pop();
-            },)),
-            liveViewWidget(size),
-          ],
+      return Scaffold(
+        body: Container(
+          width: size.width,
+          height: size.height,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              liveViewWidget(size),
+            ],
+          ),
         ),
       );
     });
@@ -77,13 +68,12 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
 
   // 直播界面
   Widget liveViewWidget(Size size) {
-    return _videoController.value.isInitialized
-        ? VideoPlayer(_videoController)
-        : CachedNetworkImage(
-            imageUrl: widget.anchor.headerIcon,
-            width: size.width,
-            height: size.height,
-            fit: BoxFit.cover,
-          );
+    return FijkView(
+            fit: FijkFit.fill,
+            player: _player,
+            cover: CachedNetworkImageProvider(widget.anchor.headerIcon),
+            panelBuilder: (a, _, c, f, g) {
+              return Container();
+            });
   }
 }
