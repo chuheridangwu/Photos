@@ -13,6 +13,7 @@ class Anchor extends UserInfo{
   int height;
   String videoTime;
   String desc;
+  String linkUrl;
   int index = 0; // 接口数据索引值，懒的创建模型了
-  Anchor({this.liveAddres,String userName, String headerIcon,String thumb, int uid,String strUid, this.videoTime, int level,int coins,this.width,this.height,this.desc}) : super(userName:userName, headerIcon:headerIcon, uid:uid,strUid: strUid,thumb: thumb);
+  Anchor({this.liveAddres,String userName, String headerIcon,String thumb, int uid,String strUid, this.videoTime, int level,int coins,this.width,this.height,this.desc,this.linkUrl}) : super(userName:userName, headerIcon:headerIcon, uid:uid,strUid: strUid,thumb: thumb);
 }

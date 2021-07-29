@@ -40,6 +40,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  html: ^0.15.0 #html解析库
   lpinyin: ^2.0.3   #汉字转拼音库，转失败会报错，需要处理
   intl: ^0.17.0   # 配合flutter_localizations 进行使用，多语言适配，使用插件Flutter_intl
   flutter_localizations:

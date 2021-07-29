@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:html/dom.dart';
+import 'package:html/parser.dart';
 import 'package:mglobalphoto/serve/http_request.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 import 'package:mglobalphoto/style/app_config.dart';
@@ -146,19 +148,70 @@ class HomeServe {
   }
 
   // 获取性感主播头像
-  Future<List<Anchor>> getShuffleSeexPhoto(int index) async {
-    String src = await HttpRequrst.request(
-        "http://ziti2.com/bizhi/content/public_time_line.php?channel=2&count=30&device=2&start=$index&version=1");
-    Map map = jsonDecode(src);
-    List<Anchor> anchors = [];
-    if (map["succ"] == 1) {
-      List items = map["feeds"];
-      for (var item in items) {
-        final Anchor anchor = Anchor(headerIcon: item["image_large"],thumb:item["image_thumb"] );
-        anchors.add(anchor);
-      }
+  static Future<List<Anchor>> getMztAnchorData(String link) async {
+    // 发起请求获取首页的html数据
+    String res = await HttpRequrst.request(link);
+    // 将数据解析成Document
+    Document doc = parse(res);
+
+    final List<Anchor> anchors = [];
+
+    // 获取到id为pins的对象，从pins中获取li标签，返回数组
+    List datas = doc.getElementById("pins").getElementsByTagName("li");
+    for (var item in datas) {
+      String title = item.getElementsByTagName("img")[0].attributes["alt"];
+      String linkurl = item.getElementsByTagName("a")[0].attributes["href"];
+      String imgUrl =
+          item.getElementsByTagName("img")[0].attributes["data-original"];
+      Anchor anchor =
+          Anchor(userName: title, linkUrl: linkurl, headerIcon: imgUrl);
+      anchors.add(anchor);
     }
     return anchors;
+  }
+
+    // 解析妹子图具体的主播数据
+  static Future<List<Anchor>> getPhotosData(String link) async {
+    // 发起请求获取首页的html数据
+    String res = await HttpRequrst.request(link);
+    // 将数据解析成Document
+    Document doc = parse(res);
+
+    List<Anchor> imgs = [];
+
+    // 获取总页数
+    List<Element> tagas =
+        doc.getElementsByClassName("pagenavi").first.getElementsByTagName("a");
+    // 获取单个图片
+    String imgName = doc
+            .getElementsByClassName("main-image")
+            .first
+            .getElementsByTagName("img")[0]
+            .attributes["src"] ??
+        "";
+
+    if (tagas.length != 0) {
+      int total = int.parse(
+          tagas[tagas.length - 2].getElementsByTagName("span").first.text);
+      // 例子https://imgpc.iimzt.com/2020/08/07b01.jpg
+      // 1. 取出 07b01
+      String sub = imgName.split("/").last.replaceAll(".jpg", "");
+      // 2. 保留前缀
+      String origin = imgName.replaceAll(sub + ".jpg", "");
+      // 第二步, 取出最后一位 1
+      int start = int.parse(sub.substring(sub.length - 1));
+      // 第三步, 循环遍历，生成图片地址
+      for (var i = start; i <= total; i++) {
+        // 第四步， 从尾部替换相应长度的字符串
+        String tag = sub.replaceRange(sub.length - i.toString().length,sub.length, i.toString());
+        String url = origin + tag + ".jpg";
+        imgs.add(Anchor(headerIcon: url));
+        if (i < 5) {
+          print("图片地址 >> " + url);
+        }
+      }
+    }
+    return imgs;
   }
 }
 

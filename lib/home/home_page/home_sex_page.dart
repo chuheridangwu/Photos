@@ -5,6 +5,7 @@ import 'package:mglobalphoto/home/home_server.dart';
 import 'package:mglobalphoto/home/photo_preview.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import '../photo_list.dart';
 
 class HomeSexPage extends StatefulWidget {
   const HomeSexPage({ Key key }) : super(key: key);
@@ -17,8 +18,7 @@ class _HomeSexPageState extends State<HomeSexPage> with AutomaticKeepAliveClient
   
   bool get wantKeepAlive => true;
   List<Anchor> _anchors = [];
-  HomeServe _serve = HomeServe();
-  int _index = 0;
+  int _index = 1;
 
   // 监听滑动
   RefreshController _refreshController =
@@ -27,7 +27,8 @@ class _HomeSexPageState extends State<HomeSexPage> with AutomaticKeepAliveClient
   @override
     void initState() {
       super.initState();
-      _serve.getShuffleSeexPhoto(_index).then((value){
+      String link = "https://www.mzitu.com/hot/page/" + _index.toString();
+      HomeServe.getMztAnchorData(link).then((value){
           setState(() {
             _anchors = value;
           });
@@ -36,11 +37,13 @@ class _HomeSexPageState extends State<HomeSexPage> with AutomaticKeepAliveClient
 
     void refreshData(){
       _index += 1;
-      _serve.getShuffleSeexPhoto(_index).then((value){
+      String link = "https://www.mzitu.com/page/" + _index.toString();
+      HomeServe.getMztAnchorData(link).then((value){
           setState(() {
             _anchors.addAll(value);
           });
       });
+      _refreshController.loadComplete();
         _refreshController.refreshCompleted();
     }
 
@@ -70,8 +73,9 @@ class _HomeSexPageState extends State<HomeSexPage> with AutomaticKeepAliveClient
         itemBuilder: (ctx, index) {
           Anchor anchor = _anchors[index];
           return createAnchorItem(anchor, () { 
-            Map map = {"index": index, "list": _anchors};
-            Navigator.pushNamed(context, PhotoPreView.routeName, arguments: map);
+            Map map = {"linkUrl":anchor.linkUrl,"title":anchor.userName};
+            Navigator.pushNamed(context, PhotoListView.routeName,
+                    arguments: map);
           });
         });
   }
@@ -82,7 +86,7 @@ class _HomeSexPageState extends State<HomeSexPage> with AutomaticKeepAliveClient
       child: Card(
           clipBehavior: Clip.antiAlias,
           child: CachedNetworkImage(
-            imageUrl: anchor.thumb,
+            imageUrl: anchor.headerIcon,
             fit: BoxFit.cover,
           )),
       onTap: callback,

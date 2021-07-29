@@ -14,6 +14,7 @@ import 'package:mglobalphoto/home/home.dart';
 import 'package:mglobalphoto/home/home_classify/home_classify_tabbar.dart';
 import 'package:mglobalphoto/home/home_page/home_start_item.dart';
 import 'package:mglobalphoto/home/home_page/home_album_item.dart';
+import 'package:mglobalphoto/home/photo_list.dart';
 import 'package:mglobalphoto/home/photo_preview.dart';
 import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/search/search_result.dart';
@@ -77,6 +78,7 @@ class MyApp extends StatelessWidget {
         HomePageAlbumItem.routeName: (ctx) => HomePageAlbumItem(),
         HomeClassifyTabbar.routeName: (ctx) => HomeClassifyTabbar(),
         HomeAllItem.routeName: (ctx) => HomeAllItem(),
+        PhotoListView.routeName: (ctx) => PhotoListView(),
       },
     );
   }
