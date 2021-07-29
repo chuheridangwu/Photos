@@ -51,7 +51,7 @@ class _HomeSexPageState extends State<HomeSexPage> with AutomaticKeepAliveClient
   Widget build(BuildContext context) {
     return  SmartRefresher(
         enablePullDown: false,
-        enablePullUp: true,
+        enablePullUp: _anchors.length != 0 ?  true : false,
         onLoading: refreshData,
         footer: ClassicFooter(
           loadStyle: LoadStyle.ShowWhenLoading,

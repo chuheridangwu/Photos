@@ -213,6 +213,28 @@ class HomeServe {
     }
     return imgs;
   }
+
+    // 获取直播地址
+  static Future<List<Anchor>> getLiveAnchors() async {
+    List<Anchor> anchors = [];
+    String res = await HttpRequrst.request("http://api.hclyz.com:81/mf/jsonmitao.txt");
+    Map<String, dynamic> data = jsonDecode(res);
+      List<dynamic> items = data["zhubo"];
+      if (items != null) {
+        for (var item in items) {
+          String title = item["title"];
+          if (title.contains("p") || title.contains("官方") || title.contains("澳门") || title.contains("3")) {
+            continue;
+          }
+          Anchor anchor = Anchor(
+            liveAddres: item["address"],
+            headerIcon: item["img"]
+          );
+          anchors.add(anchor);
+        }
+      }
+    return anchors;
+  }
 }
 
 /*

@@ -6,6 +6,7 @@ import 'package:mglobalphoto/home/home_page/home_all_page.dart';
 import 'package:mglobalphoto/home/home_page/home_avatar_page.dart';
 import 'package:mglobalphoto/home/home_page/home_sex_page.dart';
 import 'package:mglobalphoto/home/home_page/home_start_page.dart';
+import 'package:mglobalphoto/home/home_page/home_video.dart';
 import 'package:mglobalphoto/main.dart';
 import 'package:mglobalphoto/search/search.dart';
 import 'package:mglobalphoto/style/app_config.dart';
@@ -45,7 +46,8 @@ class _HomeLiveViewState extends State<HomeLiveView>
     Future.delayed(Duration(seconds: 3)).then((value) {
       if (AppConfig().isClose == false) {
         setState(() {
-          tabs.insert(1, S.of(navigatorKey.currentContext).home_tab_6);
+          tabs.insert(1, S.of(navigatorKey.currentContext).home_tab_7);
+          tabs.insert(2, S.of(navigatorKey.currentContext).home_tab_6);
           tabs.add(S.of(navigatorKey.currentContext).home_tab_3);
 
           _tabController = TabController(length: tabs.length, vsync: this);
@@ -78,6 +80,9 @@ class _HomeLiveViewState extends State<HomeLiveView>
               }
               if (e == S.of(navigatorKey.currentContext).home_tab_6) {
                 return HomeSexPage();
+              }
+               if (e == S.of(navigatorKey.currentContext).home_tab_7) {
+                return HomeVideoView();
               }
               return HomePageView();
             }).toList()),

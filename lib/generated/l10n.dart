@@ -614,6 +614,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Video`
+  String get home_tab_7 {
+    return Intl.message(
+      'Video',
+      name: 'home_tab_7',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
