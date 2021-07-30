@@ -223,7 +223,9 @@ class HomeServe {
       if (items != null) {
         for (var item in items) {
           String title = item["title"];
-          if (title.contains("p") || title.contains("官方") || title.contains("澳门") || title.contains("3")) {
+          if (title.contains("8p") || title.contains("官方") 
+          || title.contains("澳门") || title.contains("3")  
+          || title.contains("888") || title.contains("同城")) {
             continue;
           }
           Anchor anchor = Anchor(

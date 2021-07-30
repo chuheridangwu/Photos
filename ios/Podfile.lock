@@ -1,7 +1,7 @@
 PODS:
-  - BIJKPlayer (0.7.10)
-  - fijkplayer (0.9.0):
-    - BIJKPlayer (~> 0.7.10)
+  - BIJKPlayer (0.7.15)
+  - fijkplayer (0.10.0):
+    - BIJKPlayer (~> 0.7.15)
     - Flutter
   - Flutter (1.0.0)
   - fluttertoast (0.0.2):
@@ -115,8 +115,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter/ios"
 
 SPEC CHECKSUMS:
-  BIJKPlayer: 6727b075679eb5173b6d16f42ff2f33b9a757213
-  fijkplayer: f9cdfb1e8c9ba8ed31dda5689cebabe52f233907
+  BIJKPlayer: 37fd8033360eedfb1afc3658e14fbf5a25ace540
+  fijkplayer: 7e0358fd4f0db778616b52583e086b295c9118ce
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
