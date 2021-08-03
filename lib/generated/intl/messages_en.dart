@@ -44,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "banner_7" : MessageLookupByLibrary.simpleMessage("Small and fresh"),
     "banner_8" : MessageLookupByLibrary.simpleMessage("Sports"),
     "banner_9" : MessageLookupByLibrary.simpleMessage("Military"),
+    "cat_hot_1" : MessageLookupByLibrary.simpleMessage("HOT"),
+    "cat_hot_2" : MessageLookupByLibrary.simpleMessage("New"),
     "drawer_cache" : MessageLookupByLibrary.simpleMessage("Clear Cache"),
     "drawer_photo" : MessageLookupByLibrary.simpleMessage("Random Picture"),
     "drawer_private" : MessageLookupByLibrary.simpleMessage("Privacy Policy"),

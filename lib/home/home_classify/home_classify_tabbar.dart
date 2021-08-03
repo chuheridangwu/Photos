@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lpinyin/lpinyin.dart';
+import 'package:mglobalphoto/generated/l10n.dart';
 import 'package:mglobalphoto/home/home_classify/home_classify_item.dart';
+import 'package:mglobalphoto/main.dart';
 import 'package:mglobalphoto/serve/source_model.dart';
 
 class HomeClassifyTabbar extends StatefulWidget {
@@ -11,7 +14,7 @@ class HomeClassifyTabbar extends StatefulWidget {
 class _HomeClassifyTabbarState extends State<HomeClassifyTabbar> with SingleTickerProviderStateMixin {
 
   TabController _tabController;
-  final _tabs = ["热门","最新"];
+  final _tabs = [S.of(navigatorKey.currentContext).cat_hot_1,S.of(navigatorKey.currentContext).cat_hot_2];
   Anchor _anchor;
 
   @override
@@ -26,7 +29,7 @@ class _HomeClassifyTabbarState extends State<HomeClassifyTabbar> with SingleTick
     return DefaultTabController(length: _tabs.length, child: Scaffold(
       appBar: AppBar(
         title: FutureBuilder(builder: (ctx,asyncs){
-          return Text(_anchor.userName);
+          return Text(PinyinHelper.getPinyin(_anchor.userName));
         },),
         bottom: TabBar(
           labelStyle: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),

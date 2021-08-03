@@ -44,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "banner_7" : MessageLookupByLibrary.simpleMessage("小清新"),
     "banner_8" : MessageLookupByLibrary.simpleMessage("体育"),
     "banner_9" : MessageLookupByLibrary.simpleMessage("军事"),
+    "cat_hot_1" : MessageLookupByLibrary.simpleMessage("热门"),
+    "cat_hot_2" : MessageLookupByLibrary.simpleMessage("最新"),
     "drawer_cache" : MessageLookupByLibrary.simpleMessage("清除缓存"),
     "drawer_photo" : MessageLookupByLibrary.simpleMessage("随机图片"),
     "drawer_private" : MessageLookupByLibrary.simpleMessage("隐私政策"),

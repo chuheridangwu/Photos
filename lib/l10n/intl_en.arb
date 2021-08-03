@@ -63,5 +63,8 @@
     "home_tab_4":"Portrait",
     "home_tab_5":"Daquan",
     "home_tab_6":"Party",
-    "home_tab_7":"Video"
+    "home_tab_7":"Video",
+
+    "cat_hot_1":"HOT",
+    "cat_hot_2":"New"
 }

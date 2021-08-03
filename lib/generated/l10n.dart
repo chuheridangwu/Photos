@@ -624,6 +624,26 @@ class S {
       args: [],
     );
   }
+
+  /// `HOT`
+  String get cat_hot_1 {
+    return Intl.message(
+      'HOT',
+      name: 'cat_hot_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New`
+  String get cat_hot_2 {
+    return Intl.message(
+      'New',
+      name: 'cat_hot_2',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
